@@ -2,12 +2,15 @@ package br.com;
 
 public class testes {
 	public static void main(String[] args) {
-		String text = "	Lorem ipsum donec proin curabitur consequat lectus ullamcorper, tristique nullam fringilla curabitur sollicitudin lectus, nec pulvinar platea sit volutpat metus. quis gravida eleifend pellentesque aliquam donec accumsan potenti, ornare congue aenean ut ac inceptos lorem massa, phasellus ut vel neque primis mi. rutrum orci mauris varius rutrum libero molestie luctus et donec, urna etiam ipsum sociosqu gravida tortor semper dapibus ad, nunc quisque potenti sapien facilisis dui mi quis. ornare commodo curabitur accumsan platea fringilla euismod eget diam, auctor vestibulum neque class sapien augue dui litora ultrices, cubilia magna mi consequat blandit hendrerit sed. \n" + 
-				"\n" + 
-				"	Fames ut sapien sagittis sollicitudin eu neque ut dui venenatis, condimentum senectus ac porta faucibus gravida tortor class quisque vel, justo tempus velit orci fusce ut dolor molestie. porta donec in pretium eros habitasse mi mollis conubia gravida neque, mi vitae bibendum urna condimentum nec lorem turpis sodales, consequat platea augue tortor mauris adipiscing placerat odio est. egestas sociosqu faucibus odio quisque diam dolor egestas interdum curae, ultrices consectetur aliquet id posuere porttitor quis scelerisque, eros eget a vivamus ante mattis ad nulla. lacinia curabitur accumsan non adipiscing hendrerit posuere id libero, sed taciti porta pretium euismod lorem donec, habitasse eros venenatis aenean neque ultrices malesuada. ";
+		String text = "Delegado da Polícia Federal, eles ocupava eles o posto desde 29 de abril e foi dispensado após 18 dias de trabalho. O motivo da exoneração teria sido uma disputa com a procuradora-chefe do Inep, Carolina Scherer Bicca, segundo relataram ao UOL servidores do órgão. A demissão pegou muitos funcionários do Inep de surpresa. O conflito aconteceu em torno de uma divergência sobre a transparência de dados do Inep sobre os estudantes do ensino básico e superior. Segundo o UOL apurou, Vicenzi era favorável ao uso dessas informações para a formulação de políticas públicas. Já a procuradora é contra. Discordando de pareceres, decidiu retirar a função comissionada de um procurador. A decisão não ... - Veja mais em https://educacao.uol.com.br/noticias/2019/05/16/presidente-do-inep-e-demitido-apos-disputa-com-procuradora-chefe.htm?cmpid=copiaecola";
 		
-		Formater f = new Formater(text);
-		f.removeIfSizeLessThan(3);
-		
+		System.out.println(text);
+		System.out.println("");
+		TextFormater f = new TextFormater();
+		String newString = f.removeWordIfLessThan(4, text);
+		newString = f.toLowerCaseText(newString);
+		newString = f.removeAccent(newString);
+		newString = f.sortText(newString);
+		System.out.println(newString);
 	}
 }
