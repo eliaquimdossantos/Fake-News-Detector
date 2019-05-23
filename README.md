@@ -11,6 +11,8 @@ Fake News (…) trata-se literalmente da divulgação de notícias falsas por me
 
 Com o conhecimento adquirido na disciplina de Linguagem de Programação 2 do curso de Tecnologia da Informação da UFRN, foi desenvolvido um software em Java para a detecção de fake news.
 
+Referência: CELI, Renata. Fake news: o que é, consequências e redação!. Stood. Disponível em: <https://www.stoodi.com.br/blog/2019/01/03/fake-news-o-que-e/>. Acesso em: 23 mai. 2019. 
+
 ## Instalação e execução
 
 Para instalar e executar o programa siga as instruções:
