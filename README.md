@@ -7,7 +7,7 @@ Desenvolvido  por [Allan de Miranda](https://github.com/allandemiranda)
 
 ## Introdução
 
-Fake News (…) trata-se literalmente da divulgação de notícias falsas por meio das redes sociais que, com a popularização da internet, podem causar impactos negativos na sociedade (CELI, 2019). Para evitar tais problemas, é necessário a criação de uma ferramenta de verificação de notícias. O projeto está disposto a apresentar uma ferramenta capaz de identificar tal problemática.
+Fake News (…) trata-se literalmente da divulgação de notícias falsas por meio das redes sociais que, com a popularização da internet, podem causar impactos negativos na sociedade (CELI, 2019). Para evitar tais problemas, é necessário a criação de uma ferramenta de verificação de notícias.
 
 Com o conhecimento adquirido na disciplina de Linguagem de Programação 2 do curso de Tecnologia da Informação da UFRN, foi desenvolvido um software em Java para a detecção de fake news.
 
