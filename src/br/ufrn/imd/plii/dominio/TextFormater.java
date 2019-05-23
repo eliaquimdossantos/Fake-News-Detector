@@ -1,4 +1,4 @@
-package br.com;
+package br.ufrn.imd.plii.dominio;
 
 import java.text.Normalizer;
 

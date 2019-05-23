@@ -1,4 +1,4 @@
-package br.com;
+package br.ufrn.imd.plii.dominio;
 
 public class testes {
 	public static void main(String[] args) {
