@@ -25,7 +25,7 @@ Para instalar e executar o programa siga as instruções:
 
 ## Como utilizar
 
-Ao abrir o programa de Fake News, adicione no campo de texto parte da notícia que você deseja verificar sua veracidade.
+Ao abrir o programa de Fake News, adicione no campo de link da notícia a notícia a qual você deseja verificar sua veracidade.
 
 (imagem com essa ação)
 
