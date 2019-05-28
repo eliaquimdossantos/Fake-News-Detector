@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-public class TextFormater {
+public class Formater {
 	
 	/**
 	 * Remove o caractere informado do texto pela expressão regular

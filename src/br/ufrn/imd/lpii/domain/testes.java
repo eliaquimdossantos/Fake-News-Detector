@@ -6,7 +6,7 @@ public class testes {
 		
 		System.out.println(text);
 		System.out.println("");
-		TextFormater f = new TextFormater();
+		Formater f = new Formater();
 		String newString = f.removeWordIfLessThan(4, text);
 		newString = f.toLowerCaseText(newString);
 		newString = f.removeAccent(newString);
