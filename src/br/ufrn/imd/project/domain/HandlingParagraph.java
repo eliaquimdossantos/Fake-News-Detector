@@ -27,8 +27,7 @@ public class HandlingParagraph {
 		text = toLowerCaseText(text);
 		text = removeRepeatedWords(text);
 		text = sortText(text);
-		this.text = text;		
-		System.out.println(text);
+		this.text = text;				
 	}
 
 	/**

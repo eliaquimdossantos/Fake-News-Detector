@@ -25,10 +25,10 @@ public class WebNews extends News {
 		boolean fist = true;
 		for (String text : paragraphs) {
 			if (fist == true) {
-				this.article = new Article(text);
-
+				HandlingParagraph formatedText = new HandlingParagraph(text);
+				this.article = new Article(text);				
 				this.hashTheMap = new ArrayList<String>();
-				String hash = stringToHash(text);
+				String hash = stringToHash(formatedText.getText());
 				hashTheMap.add(hash);
 
 				fist = false;
