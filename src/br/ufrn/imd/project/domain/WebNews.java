@@ -33,8 +33,9 @@ public class WebNews extends News {
 
 				fist = false;
 			} else {
-				article.addParagraph(text);
-				String hash = stringToHash(text);
+				HandlingParagraph formatedText = new HandlingParagraph(text);
+				article.addParagraph(formatedText.getText());
+				String hash = stringToHash(formatedText.getText());
 				hashTheMap.add(hash);
 			}
 		}
