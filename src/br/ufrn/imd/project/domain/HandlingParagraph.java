@@ -5,6 +5,7 @@ package br.ufrn.imd.project.domain;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
@@ -25,8 +26,9 @@ public class HandlingParagraph {
 		text = removeAccent(text);
 		text = toLowerCaseText(text);
 		text = removeRepeatedWords(text);
-		this.text = text;
-		System.out.println(this.text);
+		text = sortText(text);
+		this.text = text;		
+		System.out.println(text);
 	}
 
 	/**
@@ -73,7 +75,11 @@ public class HandlingParagraph {
 			words[i] = removeCharacter(words[i], "\n");
 			words[i] = removeCharacter(words[i], "\t");
 			words[i] = removeCharacter(words[i], ",");
-			words[i] = removeCharacter(words[i], "[.]");			
+			words[i] = removeCharacter(words[i], "[.]");
+			words[i] = removeCharacter(words[i], "[(]");
+			words[i] = removeCharacter(words[i], "[)]");
+			words[i] = removeCharacter(words[i], ";");
+			words[i] = removeCharacter(words[i], "-");
 
 			if (words[i].length() >= size) {
 				wordList.add(words[i]);
@@ -125,17 +131,17 @@ public class HandlingParagraph {
 		return String.join(" ", wordList);
 	}
 
-//	private String sortText(String text) {
-//		String [] words = text.split(" ");
-//		int text_size = words.length;
-//		ArrayList<String> wordList = new ArrayList<String>();
-//		
-//		for(int i = 0; i < text_size; i++) {
-//			wordList.add(words[i]);
-//		}
-//		
-//		Collections.sort(wordList);
-//		
-//		return String.join(" ", wordList);
-//	}
+	private String sortText(String text) {
+		String [] words = text.split(" ");
+		int text_size = words.length;
+		ArrayList<String> wordList = new ArrayList<String>();
+		
+		for(int i = 0; i < text_size; i++) {
+			wordList.add(words[i]);
+		}
+		
+		Collections.sort(wordList);
+		
+		return String.join(" ", wordList);
+	}
 }

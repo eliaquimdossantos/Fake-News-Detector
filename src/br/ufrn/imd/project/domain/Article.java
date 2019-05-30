@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class Article {
-	private ArrayList<String> Paragraphs = new ArrayList<String>(); /* Paragrafos do artigo já tratados */
+	private ArrayList<String> paragraphs = new ArrayList<String>(); /* Paragrafos do artigo já tratados */
 
 	/**
 	 * Informação que contem no artigo
@@ -33,7 +33,7 @@ public class Article {
 			return null;
 		} else {
 			int numberCorrection = number - 1;
-			return Paragraphs.get(numberCorrection);
+			return paragraphs.get(numberCorrection);
 		}
 	}
 
@@ -44,7 +44,7 @@ public class Article {
 	 */
 	protected void addParagraph(String txt) {
 		HandlingParagraph text = new HandlingParagraph(txt);
-		Paragraphs.add(text.getText());
+		paragraphs.add(text.getText());
 	}
 
 	/**
@@ -53,6 +53,6 @@ public class Article {
 	 * @return Retorna número de parágrafos do artigo já armazenados
 	 */
 	protected int getTotalNumberOfParagraph() {
-		return Paragraphs.size();
+		return paragraphs.size();
 	}
 }
