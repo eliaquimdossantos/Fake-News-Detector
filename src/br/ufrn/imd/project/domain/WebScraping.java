@@ -1,5 +1,5 @@
 /**
- * Arquivo com a class WebScraping que tem a função de capturar na web a notícia
+ * Arquivo com a class WebScraping que tem a funÃ§Ã£o de capturar na web a notÃ­cia
  */
 package br.ufrn.imd.project.domain;
 
@@ -22,9 +22,9 @@ public class WebScraping {
 	private WebNews news;
 
 	/**
-	 * Campura de notícia da web
+	 * Campura de notÃ­cia da web
 	 * 
-	 * @param link Link da notícia
+	 * @param link Link da notÃ­cia
 	 */
 	public WebScraping(String link) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -33,10 +33,10 @@ public class WebScraping {
 	}
 
 	/**
-	 * Capturar os parágrafos do link
+	 * Capturar os parÃ¡grafos do link
 	 * 
-	 * @param link Link da notícia
-	 * @return Parágrafos da notícia
+	 * @param link Link da notÃ­cia
+	 * @return ParÃ¡grafos da notÃ­cia
 	 */
 	private ArrayList<String> collectParagraphs(String link) {
 		ArrayList<String> paragraphs = new ArrayList<String>();
@@ -44,7 +44,7 @@ public class WebScraping {
 			Document doc = Jsoup.connect(link).get();
 			Elements elementsTag = doc.select("p");
 			for (Element element : elementsTag) {
-				// Número mínimo de letras para não pegar texto que não é notícia
+				// NÃºmero mÃ­nimo de letras para nÃ£o pegar texto que nÃ£o Ã© notÃ­cia
 				if (element.text().length() > 200) {
 					paragraphs.add(element.text());
 				}
@@ -56,9 +56,9 @@ public class WebScraping {
 	}
 
 	/**
-	 * Abrir notícia da web
+	 * Abrir notÃ­cia da web
 	 * 
-	 * @return A notícia da web
+	 * @return A notÃ­cia da web
 	 */
 	public WebNews getWebNews() {
 		return news;

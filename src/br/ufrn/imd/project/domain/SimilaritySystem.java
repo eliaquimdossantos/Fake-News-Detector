@@ -11,13 +11,13 @@ import java.util.ArrayList;
  */
 public class SimilaritySystem {
 
-	private double similaruty; /* Similaridade entre as notÌcias */
+	private double similaruty; /* Similaridade entre as not√≠cias */
 
 	/**
 	 * Verificar similaridade
 	 * 
-	 * @param newsFake NotÌcia fake
-	 * @param newsWeb  NotÌcia da Web
+	 * @param newsFake Not√≠cia fake
+	 * @param newsWeb  Not√≠cia da Web
 	 */
 	public SimilaritySystem(FakeNews newsFake, WebNews newsWeb) {
 		this.similaruty = 0;
@@ -42,17 +42,17 @@ public class SimilaritySystem {
 	 * 
 	 * @param hashFirst  Hash sha1
 	 * @param hashSecond Hash sha1
-	 * @return Se È similares
+	 * @return Se √© similares
 	 */
 	private boolean hashSimilarity(String hashFirst, String hashSecond) {
 		return hashFirst.equals(hashSecond);
 	}
 
 	/**
-	 * Calculo de similaridade entre as notÌcias
+	 * Calculo de similaridade entre as not√≠cias
 	 * 
-	 * @param newsFake NotÌcia fake
-	 * @param newsWeb  NotÌcia da Web
+	 * @param textFirst Paragr√°fo da not√≠cia um
+	 * @param textSecond  Paragr√°fo da not√≠cia dois
 	 * @return Porcentagem de similaridade
 	 */
 	private double trigram(String textFirst, String textSecond) {

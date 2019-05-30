@@ -72,6 +72,9 @@ public final class ConstrainableInputStream extends BufferedInputStream {
     /**
      * Reads this inputstream to a ByteBuffer. The supplied max may be less than the inputstream's max, to support
      * reading just the first bytes.
+     * @param max
+     * @return
+     * @throws IOException
      */
     public ByteBuffer readToByteBuffer(int max) throws IOException {
         Validate.isTrue(max >= 0, "maxSize must be 0 (unlimited) or larger");

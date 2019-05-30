@@ -1,0 +1,10 @@
+br.ufrn.imd.project.application
+br.ufrn.imd.project.domain
+org.jsoup
+org.jsoup.examples
+org.jsoup.helper
+org.jsoup.internal
+org.jsoup.nodes
+org.jsoup.parser
+org.jsoup.safety
+org.jsoup.select

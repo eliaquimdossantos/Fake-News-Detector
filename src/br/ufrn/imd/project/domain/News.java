@@ -1,5 +1,5 @@
 /**
- * Arquivo com a class News contendo a estrutura padr„o de uma notÌcia
+ * Arquivo com a class News contendo a estrutura padr√£o de uma not√≠cia
  */
 package br.ufrn.imd.project.domain;
 
@@ -12,14 +12,14 @@ import java.security.NoSuchAlgorithmException;
  *
  */
 public abstract class News {
-	String link; /* Link da notÌcia */
+	String link; /* Link da not√≠cia */
 	String date; /* Data da postagem */
-	Article article; /* Artigo da notÌcia */
+	Article article; /* Artigo da not√≠cia */
 
 	/**
-	 * Nova notÌcia
+	 * Nova not√≠cia
 	 * 
-	 * @param link Link da notÌcia
+	 * @param link Link da not√≠cia
 	 * @param date Data da postagem
 	 */
 	public News(String link, String date) {
@@ -28,9 +28,9 @@ public abstract class News {
 	}
 
 	/**
-	 * Trasformar o par·grafo em uma hash sha1
+	 * Trasformar o par√°grafo em uma hash sha1
 	 * 
-	 * @param paragraph Texto do par·grafo j· tratado
+	 * @param paragraph Texto do par√°grafo j√° tratado
 	 * @return A hash sha1
 	 */
 	protected static String stringToHash(String paragraph) {

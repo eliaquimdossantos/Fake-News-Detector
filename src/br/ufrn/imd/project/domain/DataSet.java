@@ -1,5 +1,5 @@
 /**
- * Arquivo com a class DataSet para armazenar as FakeNews de comparação
+ * Arquivo com a class DataSet para armazenar as FakeNews de comparaÃ§Ã£o
  */
 package br.ufrn.imd.project.domain;
 
@@ -67,9 +67,9 @@ public class DataSet {
 	}
 
 	/**
-	 * Número de fakenews
+	 * NÃºmero de fakenews
 	 * 
-	 * @return Quntidade de notícias no banco de dados
+	 * @return Quntidade de notÃ­cias no banco de dados
 	 */
 	public int numberOfNews() {
 		return dataBaseFake.size();
@@ -78,12 +78,12 @@ public class DataSet {
 	/**
 	 * Obter uma fakenews
 	 * 
-	 * @param number Posição da notícia no banco de dados
+	 * @param number PosiÃ§Ã£o da notÃ­cia no banco de dados
 	 * @return A FakeNews
 	 */
 	public FakeNews getFakeNews(int number) {
 		if ((number > numberOfNews()) || (number <= 0)) {
-			// retornar erro pois o número é maior que a quantidade de parágrafos
+			// retornar erro pois o nÃºmero Ã© maior que a quantidade de parÃ¡grafos
 			return null;
 		} else {
 			int numberCorrection = number - 1;

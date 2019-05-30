@@ -16,14 +16,14 @@ import javafx.scene.text.Text;
  *
  */
 public class SampleController {
-	private String percentageFakeValue; /* Guardar o valor da porcentagem da notícia ser fake */
+	private String percentageFakeValue; /* Guardar o valor da porcentagem da notÃ­cia ser fake */
 
 	/**
 	 * Execultar o sistema
 	 * 
-	 * @param link     Link da notícia
+	 * @param link     Link da notÃ­cia
 	 * @param fileName Caminho do arquivo data set
-	 * @return Valor da porcentagem de ser fake a notícia
+	 * @return Valor da porcentagem de ser fake a notÃ­cia
 	 */
 	private String Start(String link, String fileName) {
 		DataSet dataBaseFake = new DataSet(fileName);

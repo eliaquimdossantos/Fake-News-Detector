@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="/home/allan94/.eclipse/org.eclipse.platform_4.10.0_1473617060_linux_gtk_x86_64/plugins/org.eclipse.fx.ide.css.jfx8_3.5.0.201902220800.jar" destdir="doc" doctitle="Projeto FAKE NEWS LP2" nodeprecated="true" nodeprecatedlist="true" noindex="false" nonavbar="false" notree="false" packagenames="org.jsoup.nodes,org.jsoup,org.jsoup.helper,org.jsoup.examples,br.ufrn.imd.project.domain,br.ufrn.imd.project.application,org.jsoup.safety,org.jsoup.internal,org.jsoup.select,org.jsoup.parser" source="1.8" sourcepath="src" splitindex="true" use="true" version="false"/>
+    </target>
+</project>

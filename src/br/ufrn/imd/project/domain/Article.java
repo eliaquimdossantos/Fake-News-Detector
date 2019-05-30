@@ -1,5 +1,5 @@
 /**
- * Arquivo contendo a class Article desenvolvida para armazenar as informaçõs de contidas no texto da notícia
+ * Arquivo contendo a class Article desenvolvida para armazenar as informaÃ§Ãµs de contidas no texto da notÃ­cia
  */
 package br.ufrn.imd.project.domain;
 
@@ -10,26 +10,26 @@ import java.util.ArrayList;
  *
  */
 public class Article {
-	private ArrayList<String> Paragraphs = new ArrayList<String>(); /* Paragrafos do artigo já tratados */
+	private ArrayList<String> Paragraphs = new ArrayList<String>(); /* Paragrafos do artigo jÃ¡ tratados */
 
 	/**
-	 * Informação que contem no artigo
+	 * InformaÃ§Ã£o que contem no artigo
 	 * 
-	 * @param content Conteúdo do paráfrafo inicial
+	 * @param content ConteÃºdo do parÃ¡frafo inicial
 	 */
 	public Article(String content) {
 		addParagraph(content);
 	}
 
 	/**
-	 * Obter a informação do parágrafo já tratado do artigo
+	 * Obter a informaÃ§Ã£o do parÃ¡grafo jÃ¡ tratado do artigo
 	 * 
-	 * @param number Número do parágrafo solicitado do artigo
-	 * @return Parágrafo solicitado
+	 * @param number NÃºmero do parÃ¡grafo solicitado do artigo
+	 * @return ParÃ¡grafo solicitado
 	 */
 	protected String getParagraph(int number) {
 		if ((number > getTotalNumberOfParagraph()) || (number <= 0)) {
-			// retornar erro pois o número é maior que a quantidade de parágrafos
+			// retornar erro pois o nÃºmero Ã© maior que a quantidade de parÃ¡grafos
 			return null;
 		} else {
 			int numberCorrection = number - 1;
@@ -38,9 +38,9 @@ public class Article {
 	}
 
 	/**
-	 * Adicioar novo parágrafo
+	 * Adicioar novo parÃ¡grafo
 	 * 
-	 * @param txt Conteudo do parágrafo
+	 * @param txt Conteudo do parÃ¡grafo
 	 */
 	protected void addParagraph(String txt) {
 		HandlingParagraph text = new HandlingParagraph(txt);
@@ -50,7 +50,7 @@ public class Article {
 	/**
 	 * Verificar quantos paragrafos existem no artigo
 	 * 
-	 * @return Retorna número de paráfrafos do artigo já armazenados
+	 * @return Retorna nÃºmero de parÃ¡grafos do artigo jÃ¡ armazenados
 	 */
 	protected int getTotalNumberOfParagraph() {
 		return Paragraphs.size();
