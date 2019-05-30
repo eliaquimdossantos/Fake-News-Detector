@@ -21,11 +21,12 @@ public class HandlingParagraph {
 	 * @param text Texto para ser tratado
 	 */
 	public HandlingParagraph(String text) {
-		text = removeWordIfLessThan(3, text);
+		text = removeWordIfLessThan(4, text);
 		text = removeAccent(text);
 		text = toLowerCaseText(text);
 		text = removeRepeatedWords(text);
 		this.text = text;
+		System.out.println(this.text);
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class HandlingParagraph {
 			words[i] = removeCharacter(words[i], "\n");
 			words[i] = removeCharacter(words[i], "\t");
 			words[i] = removeCharacter(words[i], ",");
-			words[i] = removeCharacter(words[i], "[.]");
+			words[i] = removeCharacter(words[i], "[.]");			
 
 			if (words[i].length() >= size) {
 				wordList.add(words[i]);

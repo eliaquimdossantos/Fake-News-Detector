@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class WebNews extends News {
-	private ArrayList<String> hashTheMap; /* Lista de hash dos par�grafos da not�cia */
+	private ArrayList<String> hashTheMap; /* Lista de hash dos parágrafos da notícia */
 
 	/**
 	 * Nova notícia da web
@@ -47,7 +47,7 @@ public class WebNews extends News {
 	 */
 	protected String getHash(int number) {
 		if ((number > getNumberOfHash()) || (number <= 0)) {
-			// retornar erro pois n�o existe essa posi��o
+			// retornar erro pois não existe essa posisão
 			return null;
 		} else {
 			int numberCorrection = number - 1;

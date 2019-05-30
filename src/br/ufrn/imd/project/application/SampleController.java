@@ -40,7 +40,7 @@ public class SampleController {
 
 		System.out.println(Double.toString(magicSimilarity));
 
-		return Double.toString(magicSimilarity * 100);
+		return Integer.toString((int) Math.floor(magicSimilarity * 100));			
 	}
 
 	@FXML
@@ -52,7 +52,7 @@ public class SampleController {
 	@FXML
 	void checkLink(MouseEvent event) {
 		percentageFakeValue = Start(linkBar.getText(), "./data/boatos.csv");
-		percentageFake.setText(percentageFakeValue + " %");
+		percentageFake.setText(percentageFakeValue + "%");
 		System.out.println(linkBar.getText());
 	}
 

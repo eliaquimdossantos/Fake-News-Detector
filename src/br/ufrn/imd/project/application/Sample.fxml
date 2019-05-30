@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.project.application.SampleController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.project.application.SampleController">
    <children>
       <Pane prefHeight="400.0" prefWidth="400.0">
          <children>
@@ -14,7 +14,7 @@
             <Text layoutX="172.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fake News" />
             <Text layoutX="14.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Link:" />
             <Button layoutX="12.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#checkLink" text="Verificar" />
-            <Text fx:id="percentageFake" layoutX="182.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00 %" />
+            <Text fx:id="percentageFake" layoutX="192.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- - %" textAlignment="CENTER" />
             <Text layoutX="122.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Porcentagem de notícia falsa:" />
          </children>
       </Pane>
