@@ -36,6 +36,9 @@ public class SampleController {
 			if (newSimilarity.getSimilarutyValue() > magicSimilarity) {
 				magicSimilarity = newSimilarity.getSimilarutyValue();
 			}
+			if(magicSimilarity == 1.0){
+				brake;
+			}
 		}
 
 		System.out.println(Double.toString(magicSimilarity));
