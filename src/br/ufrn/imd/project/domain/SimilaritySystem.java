@@ -21,18 +21,13 @@ public class SimilaritySystem {
 	 */
 	public SimilaritySystem(FakeNews newsFake, WebNews newsWeb) {
 		this.similaruty = 0;
-		
-		System.out.println(newsFake);
-		System.out.println(newsWeb);
-		System.out.println("");
-		
 		for (int i = 0; i < newsWeb.getNumberOfArticle(); i++) {
 			if (hashSimilarity(newsFake.getHash(), newsWeb.getHash(i + 1))) {
 				similaruty = 1;
 				break;
 			}
 		}
-		
+
 		if (similaruty == 0) {
 			for (int i = 0; i < newsWeb.getNumberOfArticle(); i++) {
 				double newSimilaruty = trigram(newsFake.getParagraphFromArticle(), newsWeb.getArticle(i + 1));
@@ -50,15 +45,15 @@ public class SimilaritySystem {
 	 * @param hashSecond Hash sha1
 	 * @return Se é similares
 	 */
-	private boolean hashSimilarity(String hashFirst, String hashSecond) {		
+	private boolean hashSimilarity(String hashFirst, String hashSecond) {
 		return hashFirst.equals(hashSecond);
 	}
 
 	/**
 	 * Calculo de similaridade entre as notícias
 	 * 
-	 * @param textFirst Paragráfo da notícia um
-	 * @param textSecond  Paragráfo da notícia dois
+	 * @param textFirst  Paragráfo da notícia um
+	 * @param textSecond Paragráfo da notícia dois
 	 * @return Porcentagem de similaridade
 	 */
 	private double trigram(String textFirst, String textSecond) {
