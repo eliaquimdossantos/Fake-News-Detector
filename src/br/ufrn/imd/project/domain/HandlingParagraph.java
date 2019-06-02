@@ -79,6 +79,7 @@ public class HandlingParagraph {
 			words[i] = removeCharacter(words[i], "[)]");
 			words[i] = removeCharacter(words[i], ";");
 			words[i] = removeCharacter(words[i], "-");
+			words[i] = removeCharacter(words[i], "–");
 
 			if (words[i].length() >= size) {
 				wordList.add(words[i]);
