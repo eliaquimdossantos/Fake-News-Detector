@@ -1,7 +1,7 @@
 /**
  * Arquivo com a class SimilaritySystem que trata a similaridade entre duas String's
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 import java.util.ArrayList;
 

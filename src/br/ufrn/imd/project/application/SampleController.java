@@ -3,10 +3,10 @@
  */
 package br.ufrn.imd.project.application;
 
-import br.ufrn.imd.project.domain.DataSet;
-import br.ufrn.imd.project.domain.SimilaritySystem;
 import javafx.scene.control.Slider;
-import br.ufrn.imd.project.domain.WebScraping;
+import br.ufrn.imd.project.domain.controller.DataSetController;
+import br.ufrn.imd.project.domain.controller.SimilaritySystem;
+import br.ufrn.imd.project.domain.controller.WebScraping;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -68,7 +68,7 @@ public class SampleController {
 	 */
 	void checkLink(MouseEvent event) {
 		Alert fakeNewsAlert = new Alert(Alert.AlertType.INFORMATION);
-		fakePercentageValue = calculatedSimilarutyPercentage(linkBar.getText(), "./data/boatos.csv");
+		fakePercentageValue = calculatedSimilarutyPercentage(linkBar.getText(), "boatos.csv");
 		int fakePercentageLimiar = (int) Math.floor(similarutyLimiar.getValue());
 		
 		for(int i = 0; i <= 360; i++) {			
@@ -110,8 +110,7 @@ public class SampleController {
 	 * 
 	 * @param event Evento de mouse
 	 */
-	private void restart (MouseEvent event) {
-		String defaultColor = "#333645";
+	private void restart (MouseEvent event) {		
 		onRestartStyle();		
 		linkBar.setText("");
 		percentSimilarutyText.setText("%");
@@ -159,11 +158,16 @@ public class SampleController {
 	 * @return Valor da porcentagem de ser fake a notícia
 	 */	
 	private double calculatedSimilarutyPercentage(String link, String fileName) {
-		DataSet dataBaseFake = new DataSet(fileName);
+		
+		DataSetController dataBaseFake = new DataSetController();
+		dataBaseFake.startDataSet(fileName);
+		
 		WebScraping webNews = new WebScraping(link);
 		double calculatedSimilaruty = 0.0;
+			
+		int numberOfNews = dataBaseFake.getNumberOfNews();
 		
-		for (int i = 0; i < dataBaseFake.numberOfNews(); i++) {
+		for (int i = 0; i < numberOfNews; i++) {
 			SimilaritySystem newSimilarity = new SimilaritySystem(dataBaseFake.getFakeNews(i + 1),
 					webNews.getWebNews());
 			if (newSimilarity.getSimilarutyValue() > calculatedSimilaruty) {

@@ -1,7 +1,7 @@
 /**
  * Arquivo com a class WebScraping que tem a função de capturar na web a notícia
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;

@@ -1,7 +1,7 @@
 /**
  * Arquivo contendo a class Article desenvolvida para armazenar as informaçõs de contidas no texto da notícia
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 import java.util.ArrayList;
 

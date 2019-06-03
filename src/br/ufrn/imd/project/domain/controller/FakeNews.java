@@ -1,7 +1,7 @@
 /**
  * Arquivo com a class FakeNews com a estrutura de uma notíca falsa
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 /**
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA

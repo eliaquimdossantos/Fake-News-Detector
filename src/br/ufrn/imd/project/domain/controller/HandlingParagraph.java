@@ -1,7 +1,7 @@
 /**
  * Arquivo com a class HandlingParagraph destinada a fazer o tratamento dos parágrafos da notícia
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 import java.text.Normalizer;
 import java.util.ArrayList;

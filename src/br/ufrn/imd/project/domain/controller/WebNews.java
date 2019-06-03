@@ -1,7 +1,7 @@
 /**
  * Arquivo com a class WebNew que contem a estrutura de uma notícia da web
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 /**
  * Arquivo com a class News contendo a estrutura padrão de uma notícia
  */
-package br.ufrn.imd.project.domain;
+package br.ufrn.imd.project.domain.controller;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
