@@ -1,11 +1,12 @@
 /**
  * Class SampleController
  */
-package br.ufrn.imd.project.application;
+package br.ufrn.imd.project.application.view;
 
 import javafx.scene.control.Slider;
 import br.ufrn.imd.project.domain.controller.DataSetController;
-import br.ufrn.imd.project.domain.controller.SimilaritySystem;
+import br.ufrn.imd.project.domain.controller.MainController;
+import br.ufrn.imd.project.domain.controller.SimilaritySystemController;
 import br.ufrn.imd.project.domain.controller.WebScraping;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -14,13 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Arc;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
 /**
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public class SampleController {
+public class StartController {
 	
 	private double fakePercentageValue; /* Guardar o valor da porcentagem da notícia ser fake */
 	
@@ -29,6 +31,8 @@ public class SampleController {
 	private String defaultFakeFoundColor;
 	
 	private String defaultTrueFoundColor;
+	
+	private MainController c;
 
 	@FXML
 	private TextField linkBar;
@@ -54,11 +58,17 @@ public class SampleController {
 	@FXML
     private Button restartButton;
 	
-	public SampleController() {
+	@FXML
+    private CheckBox trigramCheckBox;
+
+    @FXML
+    private CheckBox levenshteinCheckBox;
+	
+	public StartController() {
 		defaultColor = "#333645";
 		defaultFakeFoundColor = "#b41600";
 		defaultTrueFoundColor = "#01a662";
-	}
+	}	
 	
 	@FXML
 	/**
@@ -66,9 +76,9 @@ public class SampleController {
 	 * 
 	 * @param event Evento de mouse
 	 */
-	void checkLink(MouseEvent event) {
+	private void checkLink(MouseEvent event) {
 		Alert fakeNewsAlert = new Alert(Alert.AlertType.INFORMATION);
-		fakePercentageValue = calculatedSimilarutyPercentage(linkBar.getText(), "boatos.csv");
+		fakePercentageValue = start(linkBar.getText(), "boatos.csv");
 		int fakePercentageLimiar = (int) Math.floor(similarutyLimiar.getValue());
 		
 		for(int i = 0; i <= 360; i++) {			
@@ -99,7 +109,7 @@ public class SampleController {
 	 * 
 	 * @param event Evento de mouse
 	 */
-	void checkSlider(MouseEvent event){		
+	private void checkSlider(MouseEvent event){		
 		int limiarSeted = (int) similarutyLimiar.getValue();
 		limiarText.setText(limiarSeted + "%");			
 	}
@@ -151,34 +161,25 @@ public class SampleController {
 	}
 	
 	/**
-	 * Executar o sistema
+	 * Calcular porcentagem indicadora de fake news
 	 * 
 	 * @param link     Link da notícia
 	 * @param fileName Caminho do arquivo data set
-	 * @return Valor da porcentagem de ser fake a notícia
+	 * @return Valor da porcentagem de a notícia ser fake 
 	 */	
-	private double calculatedSimilarutyPercentage(String link, String fileName) {
+	private double start(String link, String fileName) {
+		MainController c = new MainController(link, fileName);
 		
-		DataSetController dataBaseFake = new DataSetController();
-		dataBaseFake.startDataSet(fileName);
+		c.configAlgorithm("trigram");
 		
-		WebScraping webNews = new WebScraping(link);
-		double calculatedSimilaruty = 0.0;
-			
-		int numberOfNews = dataBaseFake.getNumberOfNews();
-		
-		for (int i = 0; i < numberOfNews; i++) {
-			SimilaritySystem newSimilarity = new SimilaritySystem(dataBaseFake.getFakeNews(i + 1),
-					webNews.getWebNews());
-			if (newSimilarity.getSimilarutyValue() > calculatedSimilaruty) {
-				calculatedSimilaruty = newSimilarity.getSimilarutyValue();
-			}
-			
-			if(calculatedSimilaruty == 1.0){
-				break;
-			}
+		if (!trigramCheckBox.isSelected()) {
+			trigramCheckBox.setSelected(true);
 		}
 		
-		return calculatedSimilaruty;
+		if (levenshteinCheckBox.isSelected()) {
+			c.configAlgorithm("levenshtein");
+		}
+						
+		return c.calculate();		
 	}	
 }

@@ -1,7 +1,7 @@
 /**
  * Class Main
  */
-package br.ufrn.imd.project.application;
+package br.ufrn.imd.project.application.view;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -18,7 +18,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {		
 		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
 			Scene scene = new Scene(root, 720, 480);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
