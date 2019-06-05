@@ -27,7 +27,7 @@ public class DataSetModel {
 	 * 
 	 */
 	public DataSetModel() {
-		fileName = "";
+		setFileName("");
 		this.dataSet = new ArrayList<FakeNews>();
 	}
 	
@@ -84,7 +84,7 @@ public class DataSetModel {
 	 * a quantidade de notícias armazenadas
 	 */
 	protected void loadDataSet(String fileName) {
-		this.fileName = fileName;
+		this.setFileName(fileName);
 		BufferedReader bufferedReader = null;
 		String line = "";
 		String csvDivisor = '"' + "";
@@ -148,6 +148,14 @@ public class DataSetModel {
 			int numberCorrection = number - 1;
 			return dataSet.get(numberCorrection);			
 		}
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}		
 	
 }
