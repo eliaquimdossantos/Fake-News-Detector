@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-
 import br.ufrn.imd.project.domain.controller.FakeNews;
+import br.ufrn.imd.project.domain.controller.exception.DataSetNotFoundException;
 
 /**
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
@@ -20,7 +20,7 @@ import br.ufrn.imd.project.domain.controller.FakeNews;
 public class DataSetModel {
 
 	private ArrayList<FakeNews> dataSet; /* Banco de dados com as fakenews */
-	private String fileName;	
+	private String fileName;
 
 	/**
 	 * Novo banco de dados
@@ -30,7 +30,7 @@ public class DataSetModel {
 		setFileName("");
 		this.dataSet = new ArrayList<FakeNews>();
 	}
-	
+
 	/**
 	 * Novo banco de dados
 	 * 
@@ -79,11 +79,15 @@ public class DataSetModel {
 	}
 
 	/**
-	 * Lê todo o conteúdo da base de dados e a prepara 
-	 * para operações como ler uma notícia específica ou 
-	 * a quantidade de notícias armazenadas
+	 * Lê todo o conteúdo da base de dados e a prepara para operações como ler uma
+	 * notícia específica ou a quantidade de notícias armazenadas
 	 */
-	protected void loadDataSet(String fileName) {
+	protected void loadDataSet(String fileName) throws DataSetNotFoundException, DataSetNoContentException {
+
+		if (fileName.isEmpty()) {
+			throw new DataSetNoContentException("Falha ao ler base de dados");
+		}
+
 		this.setFileName(fileName);
 		BufferedReader bufferedReader = null;
 		String line = "";
@@ -93,6 +97,7 @@ public class DataSetModel {
 				bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
 			} catch (UnsupportedEncodingException e1) {
 				e1.printStackTrace();
+				throw new DataSetNoContentException("Falha ao ler base de dados");
 			}
 			;
 			try {
@@ -110,6 +115,7 @@ public class DataSetModel {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
+				throw new DataSetNoContentException("Falha ao ler base de dados");
 			}
 
 		} catch (FileNotFoundException e) {
@@ -119,12 +125,12 @@ public class DataSetModel {
 				try {
 					bufferedReader.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					throw new DataSetNotFoundException("Arquivo de base de dados não encontrado");
 				}
 			}
-		}	
+		}
 	}
-	
+
 	/**
 	 * Número de fakenews
 	 * 
@@ -140,22 +146,21 @@ public class DataSetModel {
 	 * @param number Posição da notícia no banco de dados
 	 * @return A FakeNews
 	 */
-	protected FakeNews readFakeNews(int number) {
+	protected FakeNews readFakeNews(int number) throws DataSetNotFoundException {
 		if ((number > numberOfNews()) || (number <= 0)) {
-			System.err.println("WARNIG: DataSet is empty");
-			return null;
+			throw new DataSetNotFoundException("A base de dados está vazia?");
 		} else {
 			int numberCorrection = number - 1;
-			return dataSet.get(numberCorrection);			
+			return dataSet.get(numberCorrection);
 		}
 	}
 
-	public String getFileName() {
+	public String getFileName() throws DataSetNoContentException {
 		return fileName;
 	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
-	}		
-	
+	}
+
 }
