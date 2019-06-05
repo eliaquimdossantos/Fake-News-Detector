@@ -4,10 +4,7 @@
 package br.ufrn.imd.project.application.view;
 
 import javafx.scene.control.Slider;
-import br.ufrn.imd.project.domain.controller.DataSetController;
 import br.ufrn.imd.project.domain.controller.MainController;
-import br.ufrn.imd.project.domain.controller.SimilaritySystemController;
-import br.ufrn.imd.project.domain.controller.WebScraping;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -24,15 +21,15 @@ import javafx.scene.control.Label;
  */
 public class StartController {
 	
-	private double fakePercentageValue; /* Guardar o valor da porcentagem da notícia ser fake */
+	private double fakePercentageValue; // Guardar o valor da porcentagem da notícia ser fake
 	
-	private String defaultColor;
+	private String defaultColor; // Cor padrão do tema
 	
-	private String defaultFakeFoundColor;
+	private String defaultFakeFoundColor; // Cor do tema caso encontre uma fake news
 	
-	private String defaultTrueFoundColor;
+	private String defaultTrueFoundColor; // Cor do tema caso não seja encontrada uma fake news
 	
-	private MainController c;
+	Alert alert; // Responsável por mostrar mensagens de alerta na tela
 
 	@FXML
 	private TextField linkBar;
@@ -77,8 +74,19 @@ public class StartController {
 	 * @param event Evento de mouse
 	 */
 	private void checkLink(MouseEvent event) {
-		Alert fakeNewsAlert = new Alert(Alert.AlertType.INFORMATION);
-		fakePercentageValue = start(linkBar.getText(), "boatos.csv");
+		alert = new Alert(Alert.AlertType.INFORMATION);
+		String link = linkBar.getText();					
+		
+		if(link.isEmpty()) {
+			alert.setTitle("Atenção");
+			alert.setHeaderText("Endereço de site não informado");
+			alert.setContentText("Você deve informar o link válido de uma notícia para que o resultado seja gerado.");
+			alert.show();
+			return;
+		}
+		
+		fakePercentageValue = start(link, "boatos.csv");
+				
 		int fakePercentageLimiar = (int) Math.floor(similarutyLimiar.getValue());
 		
 		for(int i = 0; i <= 360; i++) {			
@@ -87,19 +95,16 @@ public class StartController {
 		
 		if ((fakePercentageValue*100) >=  fakePercentageLimiar) {			
 			onFakeNewsDetectStyle();
-			fakeNewsAlert.setTitle("Atenção");
-			fakeNewsAlert.setHeaderText("Fake News detectada!");
-			fakeNewsAlert.setContentText("Sempre tenha a certeza de que uma notícia é "
+			alert.setTitle("Atenção");
+			alert.setHeaderText("Fake News detectada!");
+			alert.setContentText("Sempre tenha a certeza de que uma notícia é "
 					+ "verdadeira antes de compartilha-la.");
-			fakeNewsAlert.show();
+			alert.show();
 		} else {
 			onTrueNewsDetectStyle();
 		}
 		
-		percentSimilarutyText.setText((int) (fakePercentageValue*100) + "%");		
-		
-		System.out.println(linkBar.getText());
-		
+		percentSimilarutyText.setText((int) (fakePercentageValue*100) + "%");							
 	}
 		
 	@FXML
@@ -180,6 +185,6 @@ public class StartController {
 			c.configAlgorithm("levenshtein");
 		}
 						
-		return c.calculate();		
+		return c.calculateSimilarutyPercentage();		
 	}	
 }
