@@ -5,14 +5,22 @@ import br.ufrn.imd.project.domain.model.DataSetModel;
 public class DataSetController extends DataSetModel {
 	
 	private String fileName;
-	private int totalFakeNews;
+	private int totalFakeNews; // Quantidade de fakenews na base de dados
+		
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	
 	public DataSetController() {		
 		super();			
 	}
 	
 	public void startDataSet(String fileName) {
-		this.fileName = "./data/" + fileName;
+		this.fileName = fileName;
 		super.loadDataSet(this.fileName);
 		totalFakeNews = super.numberOfNews(); 		
 	}
