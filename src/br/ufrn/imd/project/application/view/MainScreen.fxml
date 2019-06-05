@@ -69,6 +69,22 @@
                   <Insets left="30.0" right="30.0" top="10.0" />
                </VBox.margin>
             </CheckBox>
+            <Label text="Caminho da base de dados" textFill="#e8e8e8">
+               <padding>
+                  <Insets left="10.0" top="30.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="dataSetDirectoryField" promptText="Insira o caminho aqui" styleClass="link-area" text="C:\Users\Eliaquim\Documents\fake-news-detector\data\boatos.csv">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </TextField>
          </children>
          <opaqueInsets>
             <Insets />
