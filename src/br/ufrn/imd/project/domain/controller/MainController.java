@@ -10,19 +10,19 @@ public class MainController {
 	private double similarutyPercentage;
 	SimilaritySystemController newSimilarity;
 
-	public MainController(String newsLink, String dataSetName) {
+	public MainController(String newsLink, String dataSetFileName) {
 		usedAlgorithms = new HashSet<String>();		
 		webNews = new WebScraping(newsLink);
 
 		fakeNewsDataBase = new DataSetController();
-		fakeNewsDataBase.startDataSet(dataSetName);
+		fakeNewsDataBase.startDataSet(dataSetFileName);
 	}
 
 	public void configAlgorithm(String algorithmName) {
 		usedAlgorithms.add(algorithmName);
 	}
 
-	public double calculate() {
+	public double calculateSimilarutyPercentage() {
 		int numberOfNews = fakeNewsDataBase.getNumberOfNews();
 
 		for (int i = 0; i < numberOfNews; i++) {
