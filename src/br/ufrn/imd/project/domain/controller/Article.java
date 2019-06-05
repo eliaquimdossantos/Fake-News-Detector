@@ -40,11 +40,18 @@ public class Article {
 	/**
 	 * Adicioar novo parágrafo
 	 * 
-	 * @param txt Conteudo do parágrafo
+	 * @param text Conteudo do parágrafo
 	 */
-	protected void addParagraph(String txt) {
-		HandlingParagraph text = new HandlingParagraph(txt);
-		paragraphs.add(text.getText());
+	protected void addParagraph(String text) {
+		HandlingText formatedText = new HandlingText(text);
+		formatedText.removeWordIfLessThan(4);
+		formatedText.toLowerCaseText();
+		formatedText.removeAccent();
+		formatedText.removeSpecialCharacter();
+		formatedText.removeRepeatedWords();
+		formatedText.sortText();			
+		
+		paragraphs.add(formatedText.getText());
 	}
 
 	/**
