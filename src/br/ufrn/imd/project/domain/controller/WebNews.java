@@ -25,7 +25,14 @@ public class WebNews extends News {
 		boolean fist = true;
 		for (String text : paragraphs) {
 			if (fist == true) {
-				HandlingParagraph formatedText = new HandlingParagraph(text);
+				HandlingText formatedText = new HandlingText(text);												
+				formatedText.removeWordIfLessThan(4);
+				formatedText.toLowerCaseText();
+				formatedText.removeAccent();
+				formatedText.removeSpecialCharacter();
+				formatedText.removeRepeatedWords();
+				formatedText.sortText();										
+				
 				this.article = new Article(text);				
 				this.hashTheMap = new ArrayList<String>();
 				String hash = stringToHash(formatedText.getText());
@@ -33,7 +40,14 @@ public class WebNews extends News {
 
 				fist = false;
 			} else {
-				HandlingParagraph formatedText = new HandlingParagraph(text);
+				HandlingText formatedText = new HandlingText(text);
+				formatedText.removeWordIfLessThan(4);
+				formatedText.toLowerCaseText();
+				formatedText.removeAccent();
+				formatedText.removeSpecialCharacter();
+				formatedText.removeRepeatedWords();
+				formatedText.sortText();						
+				
 				article.addParagraph(text);
 				String hash = stringToHash(formatedText.getText());
 				hashTheMap.add(hash);
