@@ -3,6 +3,7 @@
  */
 package br.ufrn.imd.project.domain.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import br.ufrn.imd.project.domain.similarutyAlgorithms.Algorithm;
@@ -17,6 +18,8 @@ public class SimilaritySystemController {
 
 	private double similaruty; /* Similaridade entre as notícias */
 	private HashSet<String> algorithms;
+	private FakeNews newsFake;
+	private WebNews newsWeb;
 
 	/**
 	 * Verificar similaridade
@@ -26,34 +29,36 @@ public class SimilaritySystemController {
 	 * @param algorithm Nome do algoritmo que será usado (trigram, levenshtein )
 	 */
 	public SimilaritySystemController(FakeNews newsFake, WebNews newsWeb) {
+		this.newsFake = newsFake;
+		this.newsWeb = newsWeb;
 		this.similaruty = 0;
-		this.algorithms = new HashSet<String>();
+		this.algorithms = new HashSet<String>();	
+	}
 
+	public void startTests() {
 		for (int i = 0; i < newsWeb.getNumberOfArticle(); i++) {
 			if (hashSimilarity(newsFake.getHash(), newsWeb.getHash(i + 1))) {
 				similaruty = 1;
 				break;
 			}
-		}
-
+		}		
+		
 		if (similaruty == 0) {
 			for (int i = 0; i < newsWeb.getNumberOfArticle(); i++) {
 				double newSimilaruty = calculateSimilaruty(newsFake.getParagraphFromArticle(),
-						newsWeb.getArticle(i + 1));
+						newsWeb.getArticle(i + 1));					
+				
 				if (newSimilaruty > similaruty) {
 					similaruty = newSimilaruty;
 				}
 			}
 		}
 	}
-
+	
 	public void addAlgorithm(String algorithm) {
 		String algorithmName = algorithm.toLowerCase();		
 
-		if (algorithmName.equals("levenshtein") 
-				|| algorithmName.equals("trigram")) {
-			algorithms.add(algorithmName);
-		}
+		algorithms.add(algorithmName);
 	}
 
 	/**
@@ -74,29 +79,48 @@ public class SimilaritySystemController {
 	 * @param textSecond Paragráfo da notícia dois
 	 * @return Porcentagem de similaridade
 	 */
-	private double calculateSimilaruty(String textFirst, String textSecond) {		
+	private double calculateSimilaruty(String textFirst, String textSecond) {				
+		int numberOfUsedAlgorithms = algorithms.size();		
+		double similaruty = 0;
+		double testResult = 0;
 		Algorithm a;
-		AlgorithmTrigram tr = new AlgorithmTrigram();
-		int numberOfUsedAlgorithms = 0;
+		
+		/**
+		 * Para cada algoritmo de semelhança, uma variável de controle
+		 * como as abaixo deve ser adicionada
+		 */
+		double highestResultTrigram = 0;
+		double highestResultLevenshtein = 0;
 
 		for (String algorithm : algorithms) {
-			if (algorithm.equals("trigram")) {
+			if (algorithm.equals("trigram")) {				
 				a = new AlgorithmTrigram();
+				testResult = a.startTest(textFirst, textSecond);
+				if(highestResultTrigram < testResult) {
+					highestResultTrigram = testResult;
+				}
 			} else if (algorithm.equals("levenshtein")) {
-				a = new AlgorithmLevenshtein();
-			} else {
+				a = new AlgorithmLevenshtein();				
+				testResult = a.startTest(textFirst, textSecond);				
+				if(highestResultLevenshtein < testResult) {
+					highestResultLevenshtein = testResult;
+				}
+			} else { // Algoritmo padrão
 				a = new AlgorithmTrigram();
-			}			
+				testResult = a.startTest(textFirst, textSecond);
+				if(highestResultTrigram < testResult) {
+					highestResultTrigram = testResult;
+				}
+			}																								
+		}							
 			
-			//similaruty += a.startTest(textFirst, textSecond);											
-		}					
+		similaruty += highestResultTrigram;
+		similaruty += highestResultLevenshtein;
 		
-		similaruty = tr.startTest(textFirst, textSecond);
-		
-		numberOfUsedAlgorithms = 1;		
-
 		if (numberOfUsedAlgorithms > 0) {
-			similaruty = similaruty / numberOfUsedAlgorithms;
+			similaruty = similaruty / numberOfUsedAlgorithms;			
+		} else if (similaruty > 1) {
+			similaruty = 1;
 		} else {
 			similaruty = 0;
 		}
