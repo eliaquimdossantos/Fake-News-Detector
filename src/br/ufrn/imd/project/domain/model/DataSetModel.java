@@ -92,12 +92,12 @@ public class DataSetModel {
 		BufferedReader bufferedReader = null;
 		String line = "";
 		String csvDivisor = '"' + "";
+		Boolean fileNotFound = false;
 		try {
 			try {
 				bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
 			} catch (UnsupportedEncodingException e1) {
 				e1.printStackTrace();
-				throw new DataSetNoContentException("Falha ao ler base de dados");
 			}
 			;
 			try {
@@ -115,19 +115,25 @@ public class DataSetModel {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new DataSetNoContentException("Falha ao ler base de dados");
 			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} finally {
+			fileNotFound = true;
+		} finally {						
+			
 			if (bufferedReader != null) {
 				try {
 					bufferedReader.close();
-				} catch (IOException e) {
-					throw new DataSetNotFoundException("Arquivo de base de dados não encontrado");
+				} 
+				catch (IOException e) {
+				
 				}
 			}
+		}
+		
+		if(fileNotFound) {
+			throw new DataSetNotFoundException("Arquivo de base de dados não encontrado");
 		}
 	}
 
@@ -146,9 +152,9 @@ public class DataSetModel {
 	 * @param number Posição da notícia no banco de dados
 	 * @return A FakeNews
 	 */
-	protected FakeNews readFakeNews(int number) throws DataSetNotFoundException {
+	protected FakeNews readFakeNews(int number) throws DataSetNoContentException {
 		if ((number > numberOfNews()) || (number <= 0)) {
-			throw new DataSetNotFoundException("A base de dados está vazia?");
+			throw new DataSetNoContentException("A base de dados está vazia?");
 		} else {
 			int numberCorrection = number - 1;
 			return dataSet.get(numberCorrection);
