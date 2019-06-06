@@ -27,7 +27,7 @@ public class DataSetController extends DataSetModel {
 		totalFakeNews = super.numberOfNews();
 	}
 
-	public FakeNews getFakeNews(int i) throws DataSetNotFoundException {
+	public FakeNews getFakeNews(int i) throws DataSetNotFoundException, DataSetNoContentException {
 		FakeNews f = super.readFakeNews(i);
 
 		return f;
