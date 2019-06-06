@@ -9,14 +9,14 @@ import br.ufrn.imd.project.domain.model.DataSetNoContentException;
 public class MainController {
 
 	private HashSet<String> usedAlgorithms;
-	private ArrayList<String> toGUIWarnings;
+	private static ArrayList<String[]> toGUIWarnings;
 	private DataSetController fakeNewsDataBase;
 	WebScraping webNews;
 	private double similarutyPercentage;
 	SimilaritySystemController newSimilarity;
 
 	public MainController(String newsLink, String dataSetFileName) {
-		toGUIWarnings = new ArrayList<String>();
+		toGUIWarnings = new ArrayList<String[]>();
 		usedAlgorithms = new HashSet<String>();
 		webNews = new WebScraping(newsLink);
 
@@ -24,8 +24,7 @@ public class MainController {
 		
 		try {
 			fakeNewsDataBase.startDataSet(dataSetFileName);
-		} catch (DataSetNotFoundException e) {
-			System.out.println("Aqui");
+		} catch (DataSetNotFoundException e) {			
 			addErrorMessage(e.getMessage());
 		} catch (DataSetNoContentException e) {
 			addErrorMessage(e.getMessage());
@@ -41,20 +40,27 @@ public class MainController {
 
 	public double calculateSimilarutyPercentage() {
 		int numberOfNews = fakeNewsDataBase.getNumberOfNews();
+		double similarutyValue = 0;
 
 		for (int i = 0; i < numberOfNews; i++) {
 			try {
-				newSimilarity = new SimilaritySystemController(fakeNewsDataBase.getFakeNews(i + 1), webNews.getWebNews());
+				newSimilarity = new SimilaritySystemController(fakeNewsDataBase.getFakeNews(i + 1), webNews.getWebNews());				
 			} catch (DataSetNotFoundException e) {
+				addErrorMessage(e.getLocalizedMessage());
+			} catch (DataSetNoContentException e) {
 				addErrorMessage(e.getLocalizedMessage());
 			}
 
-			for (String algorithm : usedAlgorithms) {
-				newSimilarity.addAlgorithm(algorithm);
+			for (String algorithm : usedAlgorithms) {				
+				newSimilarity.addAlgorithm(algorithm);				
 			}
+			
+			newSimilarity.startTests();
+			
+			similarutyValue = newSimilarity.getSimilarutyValue();
 
-			if (newSimilarity.getSimilarutyValue() > similarutyPercentage) {
-				similarutyPercentage = newSimilarity.getSimilarutyValue();
+			if (similarutyValue > similarutyPercentage) {
+				similarutyPercentage = similarutyValue;
 			}
 
 			if (similarutyPercentage == 1.0) {
@@ -66,12 +72,16 @@ public class MainController {
 
 	}
 
-	private void addErrorMessage(String message) {
-		System.out.println("Erro adicionado");
-		toGUIWarnings.add(message);
+	/**
+	 * Método visível em todo o pacote
+	 * @param Mensagem de erro a ser adicionada
+	 */
+	static void addErrorMessage(String message) {
+		String[] messageError = message.split(",");		
+		toGUIWarnings.add(messageError);		
 	}
 
-	public ArrayList<String> getErrorMessages() {
+	public ArrayList<String[]> getErrorMessages() {
 		return toGUIWarnings;
 	}
 
