@@ -31,7 +31,7 @@ public class WebNews extends News {
 				formatedText.removeAccent();
 				formatedText.removeSpecialCharacter();
 				formatedText.removeRepeatedWords();
-				formatedText.sortText();										
+				formatedText.sortText();						
 				
 				this.article = new Article(text);				
 				this.hashTheMap = new ArrayList<String>();
@@ -61,12 +61,11 @@ public class WebNews extends News {
 	 * @return A hash sha1
 	 */
 	protected String getHash(int number) {
-		if ((number > getNumberOfHash()) || (number <= 0)) {
-			// retornar erro pois não existe essa posisão
-			return null;
-		} else {
+		if (!((number > getNumberOfHash()) || (number <= 0))) {
 			int numberCorrection = number - 1;
 			return hashTheMap.get(numberCorrection);
+		} else {
+			return null;			
 		}
 	}
 
