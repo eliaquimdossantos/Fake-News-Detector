@@ -83,17 +83,6 @@ public class HandlingText {
 		int sizeText = words.length;
 
 		for (int i = 0; i < sizeText; i++) {
-			words[i] = removeCharacter(words[i], " ");
-			words[i] = removeCharacter(words[i], "\n");
-			words[i] = removeCharacter(words[i], "\t");
-			words[i] = removeCharacter(words[i], ",");
-			words[i] = removeCharacter(words[i], "[.]");
-			words[i] = removeCharacter(words[i], "[(]");
-			words[i] = removeCharacter(words[i], "[)]");
-			words[i] = removeCharacter(words[i], ";");
-			words[i] = removeCharacter(words[i], "-");
-			words[i] = removeCharacter(words[i], "–");
-
 			if (words[i].length() >= size) {
 				wordList.add(words[i]);
 			}
