@@ -11,7 +11,7 @@ import br.ufrn.imd.project.domain.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -36,7 +36,8 @@ public class StartController {
 
 	private String defaultTrueFoundColor; // Cor do tema caso não seja encontrada uma fake news
 
-	Alert alert; // Responsável por mostrar mensagens de alerta na tela
+	Alert alertDiag; // Responsável por mostrar mensagens de advertência na tela
+	Alert errorDiag; // Responsável por mostrar mensagens de erro na tela
 
 	@FXML
 	private TextField linkBar;
@@ -54,7 +55,7 @@ public class StartController {
 	private Label limiarText;
 
 	@FXML
-	private VBox sidebar;
+	private Pane sidebar;
 
 	@FXML
 	private Button verifyButton;
@@ -86,35 +87,41 @@ public class StartController {
 	 * @param event Evento de mouse
 	 */
 	private void checkLink(MouseEvent event) {
-		alert = new Alert(Alert.AlertType.INFORMATION);
-		
-		linkBar.setStyle("-fx-background-color:"+defaultTextFildColor);
-		dataSetDirectoryField.setStyle("-fx-background-color:"+defaultTextFildColor);
-		
+		alertDiag = new Alert(Alert.AlertType.WARNING);
+		errorDiag = new Alert(Alert.AlertType.ERROR);
+
+		linkBar.setStyle("-fx-background-color:" + defaultTextFildColor);
+		dataSetDirectoryField.setStyle("-fx-background-color:" + defaultTextFildColor);
+
 		String link = linkBar.getText();
-		String dataSetDirectory = dataSetDirectoryField.getText();		
+		String dataSetDirectory = dataSetDirectoryField.getText();
 
 		if (link.isEmpty()) {
-			linkBar.setStyle("-fx-background-color:"+defaultVoidTextFildColor);
-			alert.setTitle("Atenção");
-			alert.setHeaderText("Endereço de site não informado");
-			alert.setContentText(
+			linkBar.setStyle("-fx-background-color:" + defaultVoidTextFildColor);
+			alertDiag.setTitle("Atenção");
+			alertDiag.setHeaderText("Endereço de site não informado");
+			alertDiag.setContentText(
 					"Você deve informar o link válido de uma " + "notícia para que o resultado seja gerado.");
-			alert.show();			
+			alertDiag.show();
 			return;
 		}
 
 		if (dataSetDirectory.isEmpty()) {
-			dataSetDirectoryField.setStyle("-fx-background-color:"+defaultVoidTextFildColor);
-			alert.setTitle("Atenção");
-			alert.setHeaderText("Caminho da Base de Dados não informado!");
-			alert.setContentText(
+			dataSetDirectoryField.setStyle("-fx-background-color:" + defaultVoidTextFildColor);
+			alertDiag.setTitle("Atenção");
+			alertDiag.setHeaderText("Caminho da Base de Dados não informado!");
+			alertDiag.setContentText(
 					"Você deve informar o caminho no campo de " + "texto referente ao caminho da base de dados");
-			alert.show();			
+			alertDiag.show();
 			return;
 		}
 
 		fakePercentageValue = start(link, dataSetDirectory);
+
+		if (fakePercentageValue == -1) {
+			onRestartStyle();
+			return;
+		}
 
 		int fakePercentageLimiar = (int) Math.floor(similarutyLimiar.getValue());
 
@@ -124,11 +131,11 @@ public class StartController {
 
 		if ((fakePercentageValue * 100) >= fakePercentageLimiar) {
 			onFakeNewsDetectStyle();
-			alert.setTitle("Atenção");
-			alert.setHeaderText("Fake News detectada!");
-			alert.setContentText(
+			alertDiag.setTitle("Atenção");
+			alertDiag.setHeaderText("Fake News detectada!");
+			alertDiag.setContentText(
 					"Sempre tenha a certeza de que uma notícia é " + "verdadeira antes de compartilha-la.");
-			alert.show();
+			alertDiag.show();
 		} else {
 			onTrueNewsDetectStyle();
 		}
@@ -204,23 +211,27 @@ public class StartController {
 	private double start(String link, String fileName) {
 		MainController c = new MainController(link, fileName);
 
-		c.configAlgorithm("trigram");
-
-		if (!trigramCheckBox.isSelected()) {
+		if (!trigramCheckBox.isSelected() && !levenshteinCheckBox.isSelected()) {
 			trigramCheckBox.setSelected(true);
+		}
+
+		if (trigramCheckBox.isSelected()) {
+			c.configAlgorithm("trigram");
 		}
 
 		if (levenshteinCheckBox.isSelected()) {
 			c.configAlgorithm("levenshtein");
 		}
 
-		ArrayList<String> capturedErrors = c.getErrorMessages();
-		System.out.println(capturedErrors.size());
+		ArrayList<String[]> capturedErrors = c.getErrorMessages();
 
-		for (String error : capturedErrors) {
-			alert.setTitle("Erro");
-			alert.setHeaderText(error);
-			alert.show();
+		for (String[] error : capturedErrors) {
+			errorDiag.setTitle("Erro");
+			errorDiag.setHeaderText(error[0]);
+			errorDiag.setContentText(error[1]);
+			errorDiag.show();
+
+			return -1;
 		}
 
 		return c.calculateSimilarutyPercentage();
