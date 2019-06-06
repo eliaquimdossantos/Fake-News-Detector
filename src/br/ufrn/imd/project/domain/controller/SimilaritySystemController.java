@@ -3,7 +3,6 @@
  */
 package br.ufrn.imd.project.domain.controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import br.ufrn.imd.project.domain.similarutyAlgorithms.Algorithm;
