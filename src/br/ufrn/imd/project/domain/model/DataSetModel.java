@@ -11,7 +11,8 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import br.ufrn.imd.project.domain.controller.FakeNews;
-import br.ufrn.imd.project.domain.controller.exception.DataSetNotFoundException;
+import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
+import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
 
 /**
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA

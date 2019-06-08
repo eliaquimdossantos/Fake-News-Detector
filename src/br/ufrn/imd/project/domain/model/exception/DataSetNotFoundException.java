@@ -1,4 +1,4 @@
-package br.ufrn.imd.project.domain.controller.exception;
+package br.ufrn.imd.project.domain.model.exception;
 
 public class DataSetNotFoundException extends Exception {
 	private static final long serialVersionUID = 1L;

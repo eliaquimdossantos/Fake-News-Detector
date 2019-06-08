@@ -1,4 +1,4 @@
-package br.ufrn.imd.project.domain.model;
+package br.ufrn.imd.project.domain.model.exception;
 
 public class DataSetNoContentException extends Exception {
 	private static final long serialVersionUID = 2486670415931121940L;
