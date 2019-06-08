@@ -27,12 +27,17 @@ Para instalar e executar o programa siga as instruções:
 Ao abrir o programa é possível identificar vários campos:
 
 1. Campo para adicionar link do endereço da notícia a ser analisada:
+<img src="https://raw.githubusercontent.com/eliaquimdossantos/fake-news-detector/master/img/img3.jpg" alt="img" />
 
 2. Campo para selecionar algorítimos que podem ser utilizados na análise
+<img src="https://raw.githubusercontent.com/eliaquimdossantos/fake-news-detector/master/img/img5.jpg" alt="img" />
 
 3. Campo para adicionar banco de dados de fake news
+<img src="https://raw.githubusercontent.com/eliaquimdossantos/fake-news-detector/master/img/img6.jpg" alt="img" />
 
 4. Campo para selecionar quanto de porcentagem de semelhança é uma fake news
+<img src="https://raw.githubusercontent.com/eliaquimdossantos/fake-news-detector/master/img/img4.jpg" alt="img" />
 
 5. Ao clicar no campo Verificar e seja exibida a porcentagem de semelhança entre os parágrafos da notícia a ser verificada, com o banco de dados selecionado
+<img src="https://raw.githubusercontent.com/eliaquimdossantos/fake-news-detector/master/img/img2.jpg" alt="img" />
 
