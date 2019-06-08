@@ -3,8 +3,8 @@ package br.ufrn.imd.project.domain.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import br.ufrn.imd.project.domain.controller.exception.DataSetNotFoundException;
-import br.ufrn.imd.project.domain.model.DataSetNoContentException;
+import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
+import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
 
 public class MainController {
 

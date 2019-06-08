@@ -28,9 +28,7 @@ public class AlgorithmTrigram implements Algorithm {
 		}
 		double numberOfTotal = firstWordList.size() + secondWordList.size() - numberOfCommon;
 
-		double result = numberOfCommon / numberOfTotal;
-		
-		System.out.println(result);
+		double result = numberOfCommon / numberOfTotal;				
 		
 		return result;
 	}

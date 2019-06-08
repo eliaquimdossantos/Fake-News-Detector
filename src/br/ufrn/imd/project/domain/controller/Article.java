@@ -18,7 +18,7 @@ public class Article {
 	 * @param content Conteúdo do paráfrafo inicial
 	 */
 	public Article(String content) {
-		addParagraph(content);
+		addParagraph(content);		
 	}
 
 	/**

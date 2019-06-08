@@ -1,8 +1,8 @@
 package br.ufrn.imd.project.domain.controller;
 
-import br.ufrn.imd.project.domain.controller.exception.DataSetNotFoundException;
 import br.ufrn.imd.project.domain.model.DataSetModel;
-import br.ufrn.imd.project.domain.model.DataSetNoContentException;
+import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
+import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
 
 public class DataSetController extends DataSetModel {
 
