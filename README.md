@@ -1,4 +1,4 @@
-# Projeto FAKE NEWS LP2
+﻿# Projeto FAKE NEWS LP2
 
 Desenvolvido  por [Allan de Miranda](https://github.com/allandemiranda)
                 e [Eliaquim dos Santos](https://github.com/eliaquimdossantos)
@@ -26,12 +26,13 @@ Para instalar e executar o programa siga as instruções:
 
 Ao abrir o programa é possível identificar vários campos:
 
-1. Campo para adicionar link do endereço da notícia a ser analisada
+1. Campo para adicionar link do endereço da notícia a ser analisada:
 
 2. Campo para selecionar algorítimos que podem ser utilizados na análise
 
-3. Campo para adicionar outro banco de dados de fake news
+3. Campo para adicionar banco de dados de fake news
 
 4. Campo para selecionar quanto de porcentagem de semelhança é uma fake news
 
 5. Ao clicar no campo Verificar e seja exibida a porcentagem de semelhança entre os parágrafos da notícia a ser verificada, com o banco de dados selecionado
+
