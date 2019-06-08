@@ -20,19 +20,18 @@ Para instalar e executar o programa siga as instruções:
 1. Abra o terminal do seu sistema operacional e digite `cd`
 2. `git clone https://github.com/eliaquimdossantos/fake-news-detector`
 3. `cd fake-news-detector`
-4. `comando para compilar que não sei`
-5. `caminho para abrir o programa depois da compilação que também não sei`
+4. `./fake-news.jar`
 
 ## Como utilizar
 
-Ao abrir o programa de Fake News, adicione no campo de link da notícia a notícia a qual você deseja verificar sua veracidade.
+Ao abrir o programa é possível identificar vários campos:
 
-(imagem com essa ação)
+1. Campo para adicionar link do endereço da notícia a ser analisada
 
-Em seguida clique no botão X.
+2. Campo para selecionar algorítimos que podem ser utilizados na análise
 
-(imagem com essa ação)
+3. Campo para adicionar outro banco de dados de fake news
 
-Espere até que o programa processe sua notícia e exiba na tela a porcentagem do quanto aquela notícia pode ser falsa.
+4. Campo para selecionar quanto de porcentagem de semelhança é uma fake news
 
-(imagem com essa ação)
+5. Ao clicar no campo Verificar e seja exibida a porcentagem de semelhança entre os parágrafos da notícia a ser verificada, com o banco de dados selecionado
