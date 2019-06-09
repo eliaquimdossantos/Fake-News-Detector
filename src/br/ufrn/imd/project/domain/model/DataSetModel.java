@@ -66,8 +66,7 @@ public class DataSetModel {
 		while ((line = br.readLine()) != null) {			
 			String[] values = line.split(COMMA_DELIMITER);
 
-			if (values[1] != null) {
-				System.out.println(values[1] +" "+ values[2] +" "+ values[3]);
+			if (values[1] != null) {				
 				dataSet.add(new FakeNews(values[1], values[2], values[3]));
 			}
 
