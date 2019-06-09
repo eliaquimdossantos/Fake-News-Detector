@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
-import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
+import br.ufrn.imd.project.domain.model.exception.DataSetUninformedException;
 
 public class MainController {
 
@@ -22,15 +22,7 @@ public class MainController {
 
 		fakeNewsDataBase = new DataSetController();
 		
-		try {
-			fakeNewsDataBase.startDataSet(dataSetFileName);
-		} catch (DataSetNotFoundException e) {			
-			addErrorMessage(e.getMessage());
-		} catch (DataSetNoContentException e) {
-			addErrorMessage(e.getMessage());
-		} catch (Exception e) {
-			addErrorMessage("Falha ao manipular DataSet");
-		}
+		fakeNewsDataBase.startDataSet(dataSetFileName);		
 		
 	}
 
@@ -45,7 +37,7 @@ public class MainController {
 		for (int i = 0; i < numberOfNews; i++) {
 			try {
 				newSimilarity = new SimilaritySystemController(fakeNewsDataBase.getFakeNews(i + 1), webNews.getWebNews());				
-			} catch (DataSetNotFoundException e) {
+			} catch (DataSetUninformedException e) {
 				addErrorMessage(e.getLocalizedMessage());
 			} catch (DataSetNoContentException e) {
 				addErrorMessage(e.getLocalizedMessage());

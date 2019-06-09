@@ -79,7 +79,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="dataSetDirectoryField" promptText="Insira o caminho aqui" styleClass="link-area">
+                  <TextField fx:id="dataSetDirectoryField" promptText="Insira o caminho aqui" styleClass="link-area" text="C:\Users\Eliaquim\Documents\fake-news-detector\data\boatos.csv">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
@@ -96,7 +96,7 @@
       </Pane>
       <Pane layoutX="246.0" prefHeight="480.0" prefWidth="450.0" styleClass="main_background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="linkBar" layoutX="13.0" layoutY="29.0" prefHeight="41.0" prefWidth="445.0" promptText="Endereço do site" styleClass="link-area">
+            <TextField fx:id="linkBar" layoutX="13.0" layoutY="29.0" prefHeight="41.0" prefWidth="445.0" promptText="Endereço do site" styleClass="link-area" text="https://g1.globo.com/politica/noticia/2019/06/08/bolsonaro-diz-que-tera-de-suspender-beneficios-se-congresso-nao-aprovar-credito-de-r-248-bilhoes-ao-governo.ghtml">
                <padding>
                   <Insets bottom="5.0" left="10.0" right="100.0" top="5.0" />
                </padding>

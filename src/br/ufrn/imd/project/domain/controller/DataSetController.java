@@ -1,8 +1,11 @@
 package br.ufrn.imd.project.domain.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import br.ufrn.imd.project.domain.model.DataSetModel;
 import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
-import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
+import br.ufrn.imd.project.domain.model.exception.DataSetUninformedException;
 
 public class DataSetController extends DataSetModel {
 
@@ -21,13 +24,27 @@ public class DataSetController extends DataSetModel {
 		super();
 	}
 
-	public void startDataSet(String fileName) throws DataSetNotFoundException, DataSetNoContentException {
+	public void startDataSet(String fileName) {
 		this.fileName = fileName;
-		super.loadDataSet(this.fileName);
+		try {
+			super.loadDataSet(this.fileName);
+		} catch (FileNotFoundException e) {
+			MainController.addErrorMessage("Arquivo não encontrado,Verifique o caminho informado.");
+		} catch (DataSetUninformedException e) {
+			System.err.println(e.getMessage());
+		} catch (DataSetNoContentException e) {
+			MainController.addErrorMessage("Dados insuficientes,Verifique se está usando a base correta");
+			e.printStackTrace();
+		} catch (IOException e) {
+			MainController.addErrorMessage("Erro ao manipular Base de Dados");
+			e.printStackTrace();
+		} catch (Exception e) {
+			MainController.addErrorMessage("Erro (DataSet)");
+		}
 		totalFakeNews = super.numberOfNews();
 	}
 
-	public FakeNews getFakeNews(int i) throws DataSetNotFoundException, DataSetNoContentException {
+	public FakeNews getFakeNews(int i) throws DataSetUninformedException, DataSetNoContentException {
 		FakeNews f = super.readFakeNews(i);
 
 		return f;
