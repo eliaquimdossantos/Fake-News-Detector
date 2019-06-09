@@ -1,0 +1,33 @@
+.main_background{
+	-fx-background-color: #ffff;	
+}
+.parent{
+	-fx-background-color: #ffff;
+}
+.sidebar{
+	-fx-background-color: #333645;
+}
+.button{
+	-fx-background-color: #333645;
+	-fx-background-radius: 20.0;
+	-fx-text-fill: #ffff;	 
+}
+.restart-button{
+	-fx-background-color: #333645;
+	-fx-background-radius: 30.0;
+	-fx-text-fill: #ffff;	 
+}
+.link-area{
+	-fx-background-radius: 20.0;
+	-fx-background-color: #e6e6e6;
+	-fx-prompt-text-fill: #767676;	  
+}
+.percent-text{	
+	-fx-text-fill: #333645; 
+}
+.fill-text{	
+	-fx-text-fill: #828282;	 
+}
+.fill-fake-percentage{
+	-fx-fill: #333645;
+}
