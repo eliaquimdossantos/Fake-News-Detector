@@ -4,15 +4,14 @@
 package br.ufrn.imd.project.domain.model;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import br.ufrn.imd.project.domain.controller.FakeNews;
+
+import br.ufrn.imd.project.domain.controller.FakeNewsController;
 import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
-import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
+import br.ufrn.imd.project.domain.model.exception.DataSetUninformedException;
 
 /**
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
@@ -20,8 +19,10 @@ import br.ufrn.imd.project.domain.model.exception.DataSetNotFoundException;
  */
 public class DataSetModel {
 
-	private ArrayList<FakeNews> dataSet; /* Banco de dados com as fakenews */
+	private ArrayList<FakeNewsController> dataSet; /* Banco de dados com as fakenews */
+	private final String COMMA_DELIMITER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
 	private String fileName;
+	private BufferedReader br;
 
 	/**
 	 * Novo banco de dados
@@ -29,7 +30,7 @@ public class DataSetModel {
 	 */
 	public DataSetModel() {
 		setFileName("");
-		this.dataSet = new ArrayList<FakeNews>();
+		this.dataSet = new ArrayList<FakeNewsController>();
 	}
 
 	/**
@@ -37,104 +38,100 @@ public class DataSetModel {
 	 * 
 	 * @param fileName Caminho do arquivo de dados
 	 */
-	protected DataSetModel(String fileName) {
-		this.dataSet = new ArrayList<FakeNews>();
-		BufferedReader bufferedReader = null;
-		String line = "";
-		String csvDivisor = '"' + "";
-		try {
-			try {
-				bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
-			} catch (UnsupportedEncodingException e1) {
-				e1.printStackTrace();
-			}
-			;
-			try {
-				while ((line = bufferedReader.readLine()) != null) {
-					String[] content = line.split(csvDivisor);
-
-					String newsParagraph = content[1];
-
-					String[] contentLast = content[2].split(",");
-					String newsLink = contentLast[1];
-					String newsData = contentLast[2];
-
-					FakeNews news = new FakeNews(newsLink, newsData, newsParagraph);
-					dataSet.add(news);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			if (bufferedReader != null) {
-				try {
-					bufferedReader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	public DataSetModel(String fileName) {
+		this.fileName = fileName;
+		this.dataSet = new ArrayList<FakeNewsController>();
 	}
 
 	/**
 	 * Lê todo o conteúdo da base de dados e a prepara para operações como ler uma
 	 * notícia específica ou a quantidade de notícias armazenadas
+	 * @throws IOException 
 	 */
-	protected void loadDataSet(String fileName) throws DataSetNotFoundException, DataSetNoContentException {
-
+	public void loadDataSet(String fileName)
+			throws DataSetUninformedException, DataSetNoContentException, FileNotFoundException, IOException {
+		
+		// Variáveis auxiliares
+		String newsLink;
+		String newsDate;
+		String newsText;
+		
+		System.out.println("Inicializando dataset"); // LOG
+		
 		if (fileName.isEmpty()) {
 			throw new DataSetNoContentException("Falha ao ler base de dados");
 		}
 
 		this.setFileName(fileName);
-		BufferedReader bufferedReader = null;
-		String line = "";
-		String csvDivisor = '"' + "";
-		Boolean fileNotFound = false;
-		try {
-			try {
-				bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
-			} catch (UnsupportedEncodingException e1) {
-				e1.printStackTrace();
-			}
-			;
-			try {
-				while ((line = bufferedReader.readLine()) != null) {
-					String[] content = line.split(csvDivisor);
 
-					String newsParagraph = content[1];
+		if (fileName == "") {
+			throw new DataSetUninformedException(
+					"Erro no caminho do DataSet," + "Verifique se o caminho está completo");
+		}
 
-					String[] contentLast = content[2].split(",");
-					String newsLink = contentLast[1];
-					String newsData = contentLast[2];
-
-					FakeNews news = new FakeNews(newsLink, newsData, newsParagraph);
-					dataSet.add(news);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			fileNotFound = true;
-		} finally {						
+		int totalRead = 0;
+		br = new BufferedReader(new FileReader(fileName));
+		String line;		
+		System.out.println("Carregando dados do dataset"); // LOG
+		while ((line = br.readLine()) != null) {						
+			String[] values = line.split(COMMA_DELIMITER);
 			
-			if (bufferedReader != null) {
-				try {
-					bufferedReader.close();
-				} 
-				catch (IOException e) {
-				
-				}
+			try {
+				newsLink = values[1];
+			} catch (Exception e) {
+				newsLink = "";
 			}
+			
+			try {
+				newsText = values[2];
+			} catch (Exception e) {
+				newsText = "";
+			}
+			
+			try {
+				newsDate = values[3];
+			} catch (Exception e) {
+				newsDate = "";
+			}					
+								
+			/**
+			 * Captura fakenews do dataset
+			 */
+			dataSet.add(new FakeNewsController(newsLink, newsDate, newsText));
+			
+			totalRead++;			
 		}
 		
-		if(fileNotFound) {
-			throw new DataSetNotFoundException("Arquivo de base de dados não encontrado");
+		System.out.println(totalRead + " Linhas carregadas do dataset"); // LOG
+	}
+	
+	/**
+	 * Lê todo o conteúdo da base de dados e a prepara para operações como ler uma
+	 * notícia específica ou a quantidade de notícias armazenadas
+	 * @throws IOException 
+	 */
+	public void loadDataSet()
+			throws DataSetUninformedException, DataSetNoContentException, IOException {
+		if (fileName.isEmpty()) {
+			throw new DataSetNoContentException("Falha ao ler base de dados");
+		}
+
+		this.setFileName(fileName);
+
+		if (fileName == "") {
+			throw new DataSetUninformedException(
+					"Erro no caminho do DataSet," + "Verifique se o caminho está completo");
+		}
+
+		br = new BufferedReader(new FileReader(fileName));
+		String line;
+		while ((line = br.readLine()) != null) {
+			String[] values = line.split(COMMA_DELIMITER);
+
+			if (values[1] != null) {
+				dataSet.add(new FakeNewsController(values[1], values[2], values[3]));				
+			}
+
 		}
 	}
 
@@ -143,21 +140,21 @@ public class DataSetModel {
 	 * 
 	 * @return Quntidade de notícias no banco de dados
 	 */
-	protected int numberOfNews() {
+	public int numberOfNews() {
 		return dataSet.size();
 	}
 
 	/**
 	 * Obter uma fakenews
 	 * 
-	 * @param number Posição da notícia no banco de dados
+	 * @param index Posição da notícia no banco de dados
 	 * @return A FakeNews
 	 */
-	protected FakeNews readFakeNews(int number) throws DataSetNoContentException {
-		if ((number > numberOfNews()) || (number <= 0)) {
+	public FakeNewsController readFakeNews(int index) throws DataSetNoContentException {
+		if ((index > numberOfNews()) || (index <= 0)) {
 			throw new DataSetNoContentException("A base de dados está vazia?");
 		} else {
-			int numberCorrection = number - 1;
+			int numberCorrection = index - 1;
 			return dataSet.get(numberCorrection);
 		}
 	}

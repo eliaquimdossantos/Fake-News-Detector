@@ -7,7 +7,7 @@ package br.ufrn.imd.project.domain.controller;
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public class FakeNews extends News {
+public class FakeNewsController extends NewsController {
 	private String hash; /* Hash da notícia */
 
 	/**
@@ -17,10 +17,10 @@ public class FakeNews extends News {
 	 * @param date Data da postagem falsa
 	 * @param text Texto contido na notícia falsa
 	 */
-	public FakeNews(String link, String date, String text) {
+	public FakeNewsController(String link, String date, String text) {
 		super(link, date);
 
-		this.article = new Article(text);
+		this.article = new ArticleController(text);
 
 		this.hash = stringToHash(article.getParagraph(1));
 	}

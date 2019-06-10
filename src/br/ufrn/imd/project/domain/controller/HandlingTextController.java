@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public class HandlingText {
+public class HandlingTextController {
 	private String text; 
 
 	/**
@@ -21,7 +21,7 @@ public class HandlingText {
 	 * 
 	 * @param text Texto para ser tratado
 	 */
-	public HandlingText(String text) {		
+	public HandlingTextController(String text) {		
 		this.text = text;				
 	}
 	

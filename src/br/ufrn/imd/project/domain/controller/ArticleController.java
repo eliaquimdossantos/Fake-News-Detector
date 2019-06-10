@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public class Article {
+public class ArticleController {
 	private ArrayList<String> paragraphs = new ArrayList<String>(); /* Paragrafos do artigo já tratados */
 
 	/**
@@ -17,7 +17,7 @@ public class Article {
 	 * 
 	 * @param content Conteúdo do paráfrafo inicial
 	 */
-	public Article(String content) {
+	public ArticleController(String content) {
 		addParagraph(content);		
 	}
 
@@ -43,7 +43,7 @@ public class Article {
 	 * @param text Conteudo do parágrafo
 	 */
 	protected void addParagraph(String text) {
-		HandlingText formatedText = new HandlingText(text);
+		HandlingTextController formatedText = new HandlingTextController(text);
 		formatedText.removeWordIfLessThan(4);
 		formatedText.toLowerCaseText();
 		formatedText.removeAccent();

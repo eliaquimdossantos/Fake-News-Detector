@@ -18,18 +18,18 @@ import org.jsoup.select.Elements;
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public class WebScraping {
-	private WebNews news;
+public class WebScrapingController {
+	private WebNewsController news;
 
 	/**
 	 * Campura de notícia da web
 	 * 
 	 * @param link Link da notícia
 	 */
-	public WebScraping(String link) {
+	public WebScrapingController(String link) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		this.news = new WebNews(link, dateFormat.format(date), collectParagraphs(link));
+		this.news = new WebNewsController(link, dateFormat.format(date), collectParagraphs(link));
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class WebScraping {
 	 * 
 	 * @return A notícia da web
 	 */
-	public WebNews getWebNews() {
+	public WebNewsController getWebNews() {
 		return news;
 	}
 

@@ -2,6 +2,11 @@ package br.ufrn.imd.project.domain.similarutyAlgorithms;
 
 import java.util.ArrayList;
 
+/**
+ * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
+ *
+ */
+
 public class AlgorithmTrigram implements Algorithm {
 
 	@Override
