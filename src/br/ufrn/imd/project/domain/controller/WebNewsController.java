@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public class WebNews extends News {
+public class WebNewsController extends NewsController {
 	private ArrayList<String> hashTheMap; /* Lista de hash dos parágrafos da notícia */
 
 	/**
@@ -19,13 +19,13 @@ public class WebNews extends News {
 	 * @param date       Data da postagem da web
 	 * @param paragraphs Parágrafos do artigo da notícia da web
 	 */
-	public WebNews(String link, String date, ArrayList<String> paragraphs) {
+	public WebNewsController(String link, String date, ArrayList<String> paragraphs) {
 		super(link, date);
 
 		boolean fist = true;
 		for (String text : paragraphs) {
 			if (fist == true) {
-				HandlingText formatedText = new HandlingText(text);												
+				HandlingTextController formatedText = new HandlingTextController(text);												
 				formatedText.removeWordIfLessThan(4);
 				formatedText.toLowerCaseText();
 				formatedText.removeAccent();
@@ -33,14 +33,14 @@ public class WebNews extends News {
 				formatedText.removeRepeatedWords();
 				formatedText.sortText();						
 				
-				this.article = new Article(text);				
+				this.article = new ArticleController(text);				
 				this.hashTheMap = new ArrayList<String>();
 				String hash = stringToHash(formatedText.getText());
 				hashTheMap.add(hash);
 
 				fist = false;
 			} else {
-				HandlingText formatedText = new HandlingText(text);
+				HandlingTextController formatedText = new HandlingTextController(text);
 				formatedText.removeWordIfLessThan(4);
 				formatedText.toLowerCaseText();
 				formatedText.removeAccent();

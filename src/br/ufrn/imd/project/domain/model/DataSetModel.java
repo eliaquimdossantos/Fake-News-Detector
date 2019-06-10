@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.ufrn.imd.project.domain.controller.FakeNews;
+import br.ufrn.imd.project.domain.controller.FakeNewsController;
 import br.ufrn.imd.project.domain.model.exception.DataSetNoContentException;
 import br.ufrn.imd.project.domain.model.exception.DataSetUninformedException;
 
@@ -19,7 +19,7 @@ import br.ufrn.imd.project.domain.model.exception.DataSetUninformedException;
  */
 public class DataSetModel {
 
-	private ArrayList<FakeNews> dataSet; /* Banco de dados com as fakenews */
+	private ArrayList<FakeNewsController> dataSet; /* Banco de dados com as fakenews */
 	private final String COMMA_DELIMITER = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
 	private String fileName;
 	private BufferedReader br;
@@ -30,7 +30,7 @@ public class DataSetModel {
 	 */
 	public DataSetModel() {
 		setFileName("");
-		this.dataSet = new ArrayList<FakeNews>();
+		this.dataSet = new ArrayList<FakeNewsController>();
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class DataSetModel {
 	 */
 	public DataSetModel(String fileName) {
 		this.fileName = fileName;
-		this.dataSet = new ArrayList<FakeNews>();
+		this.dataSet = new ArrayList<FakeNewsController>();
 	}
 
 	/**
@@ -48,8 +48,16 @@ public class DataSetModel {
 	 * notícia específica ou a quantidade de notícias armazenadas
 	 * @throws IOException 
 	 */
-	protected void loadDataSet(String fileName)
+	public void loadDataSet(String fileName)
 			throws DataSetUninformedException, DataSetNoContentException, FileNotFoundException, IOException {
+		
+		// Variáveis auxiliares
+		String newsLink;
+		String newsDate;
+		String newsText;
+		
+		System.out.println("Inicializando dataset"); // LOG
+		
 		if (fileName.isEmpty()) {
 			throw new DataSetNoContentException("Falha ao ler base de dados");
 		}
@@ -61,16 +69,40 @@ public class DataSetModel {
 					"Erro no caminho do DataSet," + "Verifique se o caminho está completo");
 		}
 
+		int totalRead = 0;
 		br = new BufferedReader(new FileReader(fileName));
 		String line;		
-		while ((line = br.readLine()) != null) {			
+		System.out.println("Carregando dados do dataset"); // LOG
+		while ((line = br.readLine()) != null) {						
 			String[] values = line.split(COMMA_DELIMITER);
-
-			if (values[1] != null) {				
-				dataSet.add(new FakeNews(values[1], values[2], values[3]));
+			
+			try {
+				newsLink = values[1];
+			} catch (Exception e) {
+				newsLink = "";
 			}
-
+			
+			try {
+				newsText = values[2];
+			} catch (Exception e) {
+				newsText = "";
+			}
+			
+			try {
+				newsDate = values[3];
+			} catch (Exception e) {
+				newsDate = "";
+			}					
+								
+			/**
+			 * Captura fakenews do dataset
+			 */
+			dataSet.add(new FakeNewsController(newsLink, newsDate, newsText));
+			
+			totalRead++;			
 		}
+		
+		System.out.println(totalRead + " Linhas carregadas do dataset"); // LOG
 	}
 	
 	/**
@@ -78,7 +110,7 @@ public class DataSetModel {
 	 * notícia específica ou a quantidade de notícias armazenadas
 	 * @throws IOException 
 	 */
-	protected void loadDataSet()
+	public void loadDataSet()
 			throws DataSetUninformedException, DataSetNoContentException, IOException {
 		if (fileName.isEmpty()) {
 			throw new DataSetNoContentException("Falha ao ler base de dados");
@@ -97,7 +129,7 @@ public class DataSetModel {
 			String[] values = line.split(COMMA_DELIMITER);
 
 			if (values[1] != null) {
-				dataSet.add(new FakeNews(values[1], values[2], values[3]));
+				dataSet.add(new FakeNewsController(values[1], values[2], values[3]));				
 			}
 
 		}
@@ -108,21 +140,21 @@ public class DataSetModel {
 	 * 
 	 * @return Quntidade de notícias no banco de dados
 	 */
-	protected int numberOfNews() {
+	public int numberOfNews() {
 		return dataSet.size();
 	}
 
 	/**
 	 * Obter uma fakenews
 	 * 
-	 * @param number Posição da notícia no banco de dados
+	 * @param index Posição da notícia no banco de dados
 	 * @return A FakeNews
 	 */
-	protected FakeNews readFakeNews(int number) throws DataSetNoContentException {
-		if ((number > numberOfNews()) || (number <= 0)) {
+	public FakeNewsController readFakeNews(int index) throws DataSetNoContentException {
+		if ((index > numberOfNews()) || (index <= 0)) {
 			throw new DataSetNoContentException("A base de dados está vazia?");
 		} else {
-			int numberCorrection = number - 1;
+			int numberCorrection = index - 1;
 			return dataSet.get(numberCorrection);
 		}
 	}

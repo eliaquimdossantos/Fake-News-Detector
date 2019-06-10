@@ -11,10 +11,10 @@ import java.security.NoSuchAlgorithmException;
  * @author ALLAN DE MIRANDA SILVA and ELIAQUIM DOS SANTOS COSTA
  *
  */
-public abstract class News {
+public abstract class NewsController {
 	String link; /* Link da notícia */
 	String date; /* Data da postagem */
-	Article article; /* Artigo da notícia */
+	ArticleController article; /* Artigo da notícia */
 
 	/**
 	 * Nova notícia
@@ -22,7 +22,7 @@ public abstract class News {
 	 * @param link Link da notícia
 	 * @param date Data da postagem
 	 */
-	public News(String link, String date) {
+	public NewsController(String link, String date) {
 		this.link = link;
 		this.date = date;
 	}

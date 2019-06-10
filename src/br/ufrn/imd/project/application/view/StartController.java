@@ -87,6 +87,7 @@ public class StartController {
 	 * @param event Evento de mouse
 	 */
 	private void checkLink(MouseEvent event) {
+		System.out.println("Iniciando verificação do link passado"); // LOG
 		alertDiag = new Alert(Alert.AlertType.WARNING);
 		errorDiag = new Alert(Alert.AlertType.ERROR);
 
@@ -103,6 +104,7 @@ public class StartController {
 			alertDiag.setContentText(
 					"Você deve informar o link válido de uma " + "notícia para que o resultado seja gerado.");
 			alertDiag.show();
+			System.out.println("Link não informado"); // LOG
 			return;
 		}
 
@@ -113,6 +115,7 @@ public class StartController {
 			alertDiag.setContentText(
 					"Você deve informar o caminho no campo de " + "texto referente ao caminho da base de dados");
 			alertDiag.show();
+			System.out.println("Caminho do dataset não informado"); // LOG
 			return;
 		}
 
@@ -202,7 +205,7 @@ public class StartController {
 	}
 
 	/**
-	 * Calcular porcentagem indicadora de fake news
+	 * Iniciar testes de porcentagem indicadora de fake news
 	 * 
 	 * @param link     Link da notícia
 	 * @param fileName Caminho do arquivo data set
@@ -226,9 +229,10 @@ public class StartController {
 		ArrayList<String[]> capturedErrors = c.getErrorMessages();
 
 		for (String[] error : capturedErrors) {
+			System.out.println(error[0]);
 			errorDiag.setTitle("Erro");
-			errorDiag.setHeaderText(error[0]);
-			errorDiag.setContentText(error[1]);
+			errorDiag.setHeaderText(error[0]);		
+			errorDiag.setContentText(error[1]);			
 			errorDiag.show();
 
 			return -1;
