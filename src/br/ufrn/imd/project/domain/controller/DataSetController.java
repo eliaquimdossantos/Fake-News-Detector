@@ -39,7 +39,7 @@ public class DataSetController {
 		try {
 			dataSet.loadDataSet(this.fileName);
 		} catch (FileNotFoundException e) {
-			MainController.addErrorMessage("Arquivo não encontrado,Verifique o caminho informado.");
+			MainController.addErrorMessage("Arquivo não encontrado (DataSet),Verifique o caminho da base de dados informado.");
 		} catch (DataSetUninformedException e) {
 			System.err.println(e.getMessage());
 		} catch (DataSetNoContentException e) {

@@ -38,6 +38,7 @@ public class StartController {
 
 	Alert alertDiag; // Responsável por mostrar mensagens de advertência na tela
 	Alert errorDiag; // Responsável por mostrar mensagens de erro na tela
+	Alert infoDiag; // Responsável por mostrar mensagens de informação na tela
 
 	@FXML
 	private TextField linkBar;
@@ -90,6 +91,7 @@ public class StartController {
 		System.out.println("Iniciando verificação do link passado"); // LOG
 		alertDiag = new Alert(Alert.AlertType.WARNING);
 		errorDiag = new Alert(Alert.AlertType.ERROR);
+		infoDiag = new Alert(Alert.AlertType.INFORMATION);
 
 		linkBar.setStyle("-fx-background-color:" + defaultTextFildColor);
 		dataSetDirectoryField.setStyle("-fx-background-color:" + defaultTextFildColor);
@@ -141,6 +143,9 @@ public class StartController {
 			alertDiag.show();
 		} else {
 			onTrueNewsDetectStyle();
+			infoDiag.setTitle("Atenção");
+			infoDiag.setHeaderText("A notícia parece ser verdadeira!");
+			infoDiag.show();			
 		}
 
 		percentSimilarutyText.setText((int) (fakePercentageValue * 100) + "%");

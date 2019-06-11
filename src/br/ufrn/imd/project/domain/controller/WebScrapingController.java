@@ -52,7 +52,12 @@ public class WebScrapingController {
 		} catch (IOException e) {
 			MainController.addErrorMessage("Falha na conexão com a Internet!,Verifique sua conexão e tente novamente.");
 			e.printStackTrace();
+		} catch (Exception e) {
+			MainController.addErrorMessage("Falha ao verificar o link,Verifique se o link é válido.");
+			System.out.println("Erro ao verificar link");
+			e.printStackTrace();
 		}
+		
 		return paragraphs;
 	}
 
