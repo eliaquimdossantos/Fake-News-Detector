@@ -46,18 +46,19 @@ public class DataSetModel {
 	/**
 	 * Lê todo o conteúdo da base de dados e a prepara para operações como ler uma
 	 * notícia específica ou a quantidade de notícias armazenadas
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void loadDataSet(String fileName)
 			throws DataSetUninformedException, DataSetNoContentException, FileNotFoundException, IOException {
-		
+
 		// Variáveis auxiliares
 		String newsLink;
 		String newsDate;
 		String newsText;
-		
+
 		System.out.println("Inicializando dataset"); // LOG
-		
+
 		if (fileName.isEmpty()) {
 			throw new DataSetNoContentException("Falha ao ler base de dados");
 		}
@@ -71,47 +72,70 @@ public class DataSetModel {
 
 		int totalRead = 0;
 		br = new BufferedReader(new FileReader(fileName));
-		String line;		
+		String line = br.readLine();
+		String[] columnNames = line.split(",");
+
+		int hoaxIndex = 0;
+		int timestampIndex = 0;
+		int linkIndex = 0;
+
+		int index = 0;
+		for (String columnName : columnNames) {
+			switch (columnName) {
+			case "hoax":
+				hoaxIndex = index;
+				break;
+			case "timestamp":
+				timestampIndex = index;
+				break;
+			case "link":
+				linkIndex = index;
+			}
+						
+			index++;
+		}				
+
 		System.out.println("Carregando dados do dataset"); // LOG
-		while ((line = br.readLine()) != null) {						
+
+		while ((line = br.readLine()) != null) {
 			String[] values = line.split(COMMA_DELIMITER);
-			
+
 			try {
-				newsLink = values[1];
+				newsLink = values[linkIndex];
 			} catch (Exception e) {
 				newsLink = "";
 			}
-			
+
 			try {
-				newsText = values[2];
+				newsText = values[hoaxIndex];
 			} catch (Exception e) {
 				newsText = "";
 			}
-			
+
 			try {
-				newsDate = values[3];
+				newsDate = values[timestampIndex];
 			} catch (Exception e) {
 				newsDate = "";
-			}					
-								
+			}
+
 			/**
 			 * Captura fakenews do dataset
 			 */
 			dataSet.add(new FakeNewsController(newsLink, newsDate, newsText));
-			
-			totalRead++;			
+
+			totalRead++;
 		}
-		
+
 		System.out.println(totalRead + " Linhas carregadas do dataset"); // LOG
 	}
-	
+
 	/**
 	 * Lê todo o conteúdo da base de dados e a prepara para operações como ler uma
 	 * notícia específica ou a quantidade de notícias armazenadas
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
-	public void loadDataSet()
-			throws DataSetUninformedException, DataSetNoContentException, IOException {
+	public void loadDataSet() throws DataSetUninformedException, DataSetNoContentException, IOException {
 		if (fileName.isEmpty()) {
 			throw new DataSetNoContentException("Falha ao ler base de dados");
 		}
@@ -129,7 +153,7 @@ public class DataSetModel {
 			String[] values = line.split(COMMA_DELIMITER);
 
 			if (values[1] != null) {
-				dataSet.add(new FakeNewsController(values[1], values[2], values[3]));				
+				dataSet.add(new FakeNewsController(values[1], values[2], values[3]));
 			}
 
 		}

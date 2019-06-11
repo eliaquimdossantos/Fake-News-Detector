@@ -44,9 +44,13 @@ public class SimilaritySystemController {
 		algorithms.add(algorithm.toLowerCase());
 	}
 
-	public double startTests() {				
-		for (int i = 0; i < newsWeb.getNumberOfArticle(); i++) {
-			if (hashSimilarity(newsFake.getHash(), newsWeb.getHash(i + 1))) {
+	public double startTests() {	
+		int numberOfArticles = newsWeb.getNumberOfArticle();
+		boolean isSimilar;
+		
+		for (int i = 0; i < numberOfArticles; i++) {
+			isSimilar = hashSimilarity(newsFake.getHash(), newsWeb.getHash(i + 1));
+			if (isSimilar) {
 				similaruty = 1;
 				break;
 			}
