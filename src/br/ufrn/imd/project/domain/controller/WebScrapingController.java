@@ -54,7 +54,7 @@ public class WebScrapingController {
 			e.printStackTrace();
 		} catch (Exception e) {
 			MainController.addErrorMessage("Falha ao verificar o link,Verifique se o link é válido.");
-			System.out.println("Erro ao verificar link");
+			System.err.println("Erro ao verificar link"); // LOG
 			e.printStackTrace();
 		}
 		
