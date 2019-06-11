@@ -67,4 +67,5 @@ Concluímos que é possível, através de algoritmo de similaridade, obter resul
 ## Referências
 
 CELI, Renata. Fake news: o que é, consequências e redação!. Stood. Disponível em: <https://www.stoodi.com.br/blog/2019/01/03/fake-news-o-que-e/>. Acesso em: 23 mai. 2019.
+
 Maybin, S. Sistema de algoritmo que determina pena de condenados cria polêmica nos EUA. BBC Brasil. 31 out. 2016. Disponível em: <https://www.bbc.com/portuguese/brasil-37677421>. Acesso em: 06 jun. 2019.
